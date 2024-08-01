@@ -1,8 +1,11 @@
 package com.example.confluence_api.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.example.confluence_api.api.response.LinksResponse;
 import com.example.confluence_api.entity.LinksEntity;
 
+@Component
 public class LinksMapper 
 {
     public LinksEntity responseToEntity(LinksResponse response)

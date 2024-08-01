@@ -1,10 +1,12 @@
 package com.example.confluence_api.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.example.confluence_api.api.response.ResultResponse;
 import com.example.confluence_api.entity.ContentEntity;
 
+@Component
 public class ContentMapper 
 {
     @Autowired private ExpandableMapper expandableMapper; 
