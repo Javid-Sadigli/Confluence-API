@@ -1,7 +1,16 @@
 package com.example.confluence_api.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "expandable")
 public class ExpandableEntity 
 {
+    @Id
+    public Long id; 
+    
     public String container;
     public String metadata;
     public String restrictions;
