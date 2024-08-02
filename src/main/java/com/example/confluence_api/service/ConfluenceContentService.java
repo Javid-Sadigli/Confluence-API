@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.confluence_api.api.ConfluenceClient;
 import com.example.confluence_api.api.response.ConfluenceResponse;
-import com.example.confluence_api.dto.ConfluenceContentDTO;
+import com.example.confluence_api.dto.ConfluenceRootDTO;
+import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.entity.ContentEntity;
 import com.example.confluence_api.mapper.ContentMapper;
 import com.example.confluence_api.mapper.LinksMapper;
@@ -16,11 +17,12 @@ import com.example.confluence_api.repository.ConfluenceContentRepository;
 @Service
 public class ConfluenceContentService 
 {
-    @Autowired private final ContentMapper contentMapper; 
-    @Autowired private final LinksMapper linksMapper; 
-    @Autowired private final ConfluenceClient confluenceClient; 
-    @Autowired private final ConfluenceContentRepository confluenceContentRepository; 
+    private final ContentMapper contentMapper; 
+    private final LinksMapper linksMapper; 
+    private final ConfluenceClient confluenceClient; 
+    private final ConfluenceContentRepository confluenceContentRepository; 
 
+    @Autowired
     public ConfluenceContentService(
         ContentMapper contentMapper, 
         LinksMapper linksMapper,
@@ -33,23 +35,30 @@ public class ConfluenceContentService
         this.confluenceContentRepository = confluenceContentRepository; 
     }
 
-    public ConfluenceContentDTO saveContents()
+    public ConfluenceRootDTO saveContents()
     {
-        ConfluenceContentDTO dto = new ConfluenceContentDTO();
-        ConfluenceResponse response = this.confluenceClient.fetchAllContents(); 
+        ConfluenceRootDTO dto = new ConfluenceRootDTO();
+        ConfluenceResponse response = this.confluenceClient.fetchAllContents();
+        
+        ArrayList<ContentEntity> contents = new ArrayList<ContentEntity>();
 
         dto.limit = response.limit; 
         dto.size = response.size; 
         dto.start = response.start; 
-        dto._links = this.linksMapper.responseToEntity(response._links); 
-        dto.results = new ArrayList<ContentEntity>();
+        dto._links = this.linksMapper.entityToDTO(
+            this.linksMapper.responseToEntity(response._links)
+        ); 
+        dto.results = new ArrayList<ContentDTO>();
 
         response.results.forEach((result) -> {
-            dto.results.add(this.contentMapper.responseToEntity(result)); 
+            ContentEntity contentEntity = this.contentMapper.responseToEntity(result); 
+            contents.add(contentEntity);
+            ContentDTO contentDTO = this.contentMapper.entityToDTO(contentEntity);
+            dto.results.add(contentDTO); 
         });
 
-        dto.results = (ArrayList<ContentEntity>)this.confluenceContentRepository.saveAll(dto.results); 
-
+        this.confluenceContentRepository.saveAll(contents);
+        
         return dto; 
     }
 

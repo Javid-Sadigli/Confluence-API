@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.confluence_api.dto.ConfluenceContentDTO;
+import com.example.confluence_api.dto.ConfluenceRootDTO;
 import com.example.confluence_api.service.ConfluenceContentService;
 
 @RestController
@@ -20,7 +20,7 @@ public class ConfluenceContentController
     }
 
     @GetMapping("/save") 
-    public ConfluenceContentDTO saveContents()
+    public ConfluenceRootDTO saveContents()
     {
         return this.confluenceContentService.saveContents(); 
     }

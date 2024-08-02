@@ -1,5 +1,6 @@
 package com.example.confluence_api.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -17,15 +18,15 @@ public class ContentEntity
     public String status;
     public String title;
 
-    @OneToOne 
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "extensions_id")
     public ExtensionsEntity extensions;
 
-    @OneToOne 
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "_expandable_id")
     public ExpandableEntity _expandable;
 
-    @OneToOne 
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "_links_id")
     public LinksEntity _links;    
 }

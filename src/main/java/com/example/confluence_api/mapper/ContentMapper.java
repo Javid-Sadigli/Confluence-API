@@ -4,15 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.confluence_api.api.response.ResultResponse;
+import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.entity.ContentEntity;
 
 @Component
 public class ContentMapper 
 {
-    @Autowired private ExpandableMapper expandableMapper; 
-    @Autowired private ExtensionsMapper extensionsMapper; 
-    @Autowired private LinksMapper linksMapper; 
+    private ExpandableMapper expandableMapper; 
+    private ExtensionsMapper extensionsMapper; 
+    private LinksMapper linksMapper; 
 
+    @Autowired
     public ContentMapper(
         ExpandableMapper expandableMapper, 
         ExtensionsMapper extensionsMapper, 
@@ -36,6 +38,26 @@ public class ContentMapper
             contentEntity._links = this.linksMapper.responseToEntity(response._links); 
             contentEntity.extensions = this.extensionsMapper.responseToEntity(response.extensions);
             return contentEntity; 
+        }
+        catch(NullPointerException e)
+        {
+            return null; 
+        }
+    }
+
+    public ContentDTO entityToDTO(ContentEntity contentEntity)
+    {
+        try
+        {
+            ContentDTO contentDTO = new ContentDTO(); 
+            contentDTO.id = contentEntity.id; 
+            contentDTO.status = contentEntity.status; 
+            contentDTO.title = contentEntity.title; 
+            contentDTO.type = contentEntity.type; 
+            contentDTO._expandable = this.expandableMapper.entityToDTO(contentEntity._expandable);
+            contentDTO._links = this.linksMapper.entityToDTO(contentEntity._links);
+            contentDTO.extensions = this.extensionsMapper.entityToDTO(contentEntity.extensions);
+            return contentDTO;
         }
         catch(NullPointerException e)
         {
