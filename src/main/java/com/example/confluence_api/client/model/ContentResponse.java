@@ -1,6 +1,6 @@
 package com.example.confluence_api.client.model;
 
-public class ResultResponse
+public class ContentResponse
 {
     public String id;
     public String type;

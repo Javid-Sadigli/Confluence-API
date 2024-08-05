@@ -2,7 +2,7 @@ package com.example.confluence_api.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.ResultResponse;
+import com.example.confluence_api.client.model.ContentResponse;
 import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.entity.ContentEntity;
 
@@ -23,7 +23,7 @@ public class ContentMapper
         this.linksMapper = linksMapper; 
     }
     
-    public ContentEntity responseToEntity(ResultResponse response)
+    public ContentEntity responseToEntity(ContentResponse response)
     {
         try
         {
