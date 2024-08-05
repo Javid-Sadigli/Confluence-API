@@ -1,4 +1,4 @@
-package com.example.confluence_api.api.response;
+package com.example.confluence_api.client.model;
 
 public class LinksResponse
 {

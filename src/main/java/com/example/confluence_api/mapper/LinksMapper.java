@@ -2,7 +2,7 @@ package com.example.confluence_api.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.api.response.LinksResponse;
+import com.example.confluence_api.client.model.LinksResponse;
 import com.example.confluence_api.dto.LinksDTO;
 import com.example.confluence_api.entity.LinksEntity;
 

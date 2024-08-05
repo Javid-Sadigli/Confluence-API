@@ -2,7 +2,7 @@ package com.example.confluence_api.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.api.response.ExpandableResponse;
+import com.example.confluence_api.client.model.ExpandableResponse;
 import com.example.confluence_api.dto.ExpandableDTO;
 import com.example.confluence_api.entity.ExpandableEntity;
 

@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.confluence_api.dto.ConfluenceRootDTO;
-import com.example.confluence_api.service.ConfluenceContentService;
+import com.example.confluence_api.service.ConfluenceService;
 
 @RestController
 @RequestMapping("/confluence/api/content")
-public class ConfluenceContentController 
+public class ConfluenceController 
 {
-    @Autowired private final ConfluenceContentService confluenceContentService; 
+    @Autowired private final ConfluenceService confluenceContentService; 
 
-    public ConfluenceContentController(ConfluenceContentService confluenceContentService)
+    public ConfluenceController(ConfluenceService confluenceContentService)
     {
         this.confluenceContentService = confluenceContentService; 
     }
@@ -25,6 +25,4 @@ public class ConfluenceContentController
     {
         return this.confluenceContentService.saveContents(); 
     }
-    
-
 }

@@ -2,11 +2,10 @@ package com.example.confluence_api.service;
 
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.confluence_api.api.ConfluenceClient;
-import com.example.confluence_api.api.response.ConfluenceResponse;
+import com.example.confluence_api.client.ConfluenceClient;
+import com.example.confluence_api.client.model.ConfluenceResponse;
 import com.example.confluence_api.dto.ConfluenceRootDTO;
 import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.entity.ContentEntity;
@@ -15,15 +14,14 @@ import com.example.confluence_api.mapper.LinksMapper;
 import com.example.confluence_api.repository.ConfluenceContentRepository;
 
 @Service
-public class ConfluenceContentService 
+public class ConfluenceService 
 {
     private final ContentMapper contentMapper; 
     private final LinksMapper linksMapper; 
     private final ConfluenceClient confluenceClient; 
     private final ConfluenceContentRepository confluenceContentRepository; 
 
-    @Autowired
-    public ConfluenceContentService(
+    public ConfluenceService(
         ContentMapper contentMapper, 
         LinksMapper linksMapper,
         ConfluenceClient confluenceClient, 
