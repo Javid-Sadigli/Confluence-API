@@ -6,4 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.example.confluence_api.entity.ContentEntity;
 
 @Repository
-public interface ConfluenceContentRepository extends JpaRepository<ContentEntity, String> {}
+public interface ConfluenceRepository extends JpaRepository<ContentEntity, String> {}

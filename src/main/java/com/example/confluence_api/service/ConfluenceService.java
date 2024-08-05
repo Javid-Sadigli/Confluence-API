@@ -2,6 +2,9 @@ package com.example.confluence_api.service;
 
 import java.util.ArrayList;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.confluence_api.client.ConfluenceClient;
@@ -12,7 +15,7 @@ import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.entity.ContentEntity;
 import com.example.confluence_api.mapper.ContentMapper;
 import com.example.confluence_api.mapper.LinksMapper;
-import com.example.confluence_api.repository.ConfluenceContentRepository;
+import com.example.confluence_api.repository.ConfluenceRepository;
 
 @Service
 public class ConfluenceService 
@@ -20,13 +23,13 @@ public class ConfluenceService
     private final ContentMapper contentMapper; 
     private final LinksMapper linksMapper; 
     private final ConfluenceClient confluenceClient; 
-    private final ConfluenceContentRepository confluenceContentRepository; 
+    private final ConfluenceRepository confluenceContentRepository; 
 
     public ConfluenceService(
         ContentMapper contentMapper, 
         LinksMapper linksMapper,
         ConfluenceClient confluenceClient, 
-        ConfluenceContentRepository confluenceContentRepository
+        ConfluenceRepository confluenceContentRepository
     ){
         this.confluenceClient = confluenceClient; 
         this.contentMapper = contentMapper; 
@@ -61,14 +64,17 @@ public class ConfluenceService
         return dto; 
     }
 
-    public ConfluenceRootDTO<ContentDTO> getAllContents()
+    public ConfluenceRootDTO<ContentDTO> getAllContents(int start, int limit)
     {
+        Pageable pageble = PageRequest.of(start, limit); 
+        Page<ContentEntity> contentPage = this.confluenceContentRepository.findAll(pageble);
+
         ConfluenceRootDTO<ContentDTO> dto = new ConfluenceRootDTO<ContentDTO>();
-        ArrayList<ContentEntity> contentEntities = (ArrayList<ContentEntity>)this.confluenceContentRepository.findAll(); 
+        ArrayList<ContentEntity> contentEntities = new ArrayList<ContentEntity>(contentPage.getContent()); 
         
         dto.size = contentEntities.size();
-        dto.start = 0; 
-        dto.limit = 100; 
+        dto.start = start; 
+        dto.limit = limit; 
         dto.results = new ArrayList<ContentDTO>();
         
         contentEntities.forEach((contentEntity) -> {

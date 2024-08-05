@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.confluence_api.ConfluenceApiApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-02T12:30:25" hostname="IT-L0083" time="1.859">
+<testsuite name="com.example.confluence_api.ConfluenceApiApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-05T10:18:08" hostname="IT-L0083" time="1.833">
   <properties/>
-  <testcase name="contextLoads()" classname="com.example.confluence_api.ConfluenceApiApplicationTests" time="1.859"/>
-  <system-out><![CDATA[16:30:03.375 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.confluence_api.ConfluenceApiApplicationTests]: ConfluenceApiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-16:30:03.938 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.confluence_api.ConfluenceApiApplication for test class com.example.confluence_api.ConfluenceApiApplicationTests
+  <testcase name="contextLoads()" classname="com.example.confluence_api.ConfluenceApiApplicationTests" time="1.833"/>
+  <system-out><![CDATA[14:17:51.179 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.confluence_api.ConfluenceApiApplicationTests]: ConfluenceApiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:17:51.503 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.confluence_api.ConfluenceApiApplication for test class com.example.confluence_api.ConfluenceApiApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,23 +14,23 @@
 
  :: Spring Boot ::                (v3.3.2)
 
-2024-08-02T16:30:07.407+04:00  INFO 18084 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : Starting ConfluenceApiApplicationTests using Java 17.0.11 with PID 18084 (started by javid.sadigli in C:\Users\javid.sadigli\Desktop\Java projects\confluence_api)
-2024-08-02T16:30:07.412+04:00  INFO 18084 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : No active profile set, falling back to 1 default profile: "default"
-2024-08-02T16:30:11.077+04:00  INFO 18084 --- [confluence_api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-08-02T16:30:11.404+04:00  INFO 18084 --- [confluence_api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 294 ms. Found 1 JPA repository interface.
-2024-08-02T16:30:12.678+04:00  INFO 18084 --- [confluence_api] [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=69d94cf6-7875-3c0e-a623-b1c3f50cd78f
-2024-08-02T16:30:14.012+04:00  INFO 18084 --- [confluence_api] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-08-02T16:30:14.306+04:00  INFO 18084 --- [confluence_api] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
-2024-08-02T16:30:14.429+04:00  INFO 18084 --- [confluence_api] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-08-02T16:30:15.819+04:00  INFO 18084 --- [confluence_api] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-08-02T16:30:15.924+04:00  INFO 18084 --- [confluence_api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-08-02T16:30:16.591+04:00  INFO 18084 --- [confluence_api] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5273143e
-2024-08-02T16:30:16.600+04:00  INFO 18084 --- [confluence_api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-08-02T16:30:16.778+04:00  WARN 18084 --- [confluence_api] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-08-02T16:30:19.743+04:00  INFO 18084 --- [confluence_api] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-08-02T16:30:20.139+04:00  INFO 18084 --- [confluence_api] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-08-02T16:30:20.640+04:00  WARN 18084 --- [confluence_api] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-08-02T16:30:25.448+04:00  INFO 18084 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : Started ConfluenceApiApplicationTests in 20.663 seconds (process running for 27.153)
+2024-08-05T14:17:53.726+04:00  INFO 7420 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : Starting ConfluenceApiApplicationTests using Java 17.0.11 with PID 7420 (started by javid.sadigli in C:\Users\javid.sadigli\Desktop\Java projects\confluence_api)
+2024-08-05T14:17:53.726+04:00  INFO 7420 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2024-08-05T14:17:56.946+04:00  INFO 7420 --- [confluence_api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-05T14:17:57.148+04:00  INFO 7420 --- [confluence_api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 173 ms. Found 1 JPA repository interface.
+2024-08-05T14:17:57.909+04:00  INFO 7420 --- [confluence_api] [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=b1a2f7c5-6e16-3946-be49-38467bcc95ed
+2024-08-05T14:17:58.894+04:00  INFO 7420 --- [confluence_api] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-05T14:17:59.236+04:00  INFO 7420 --- [confluence_api] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-05T14:17:59.413+04:00  INFO 7420 --- [confluence_api] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-05T14:18:00.861+04:00  INFO 7420 --- [confluence_api] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-05T14:18:00.969+04:00  INFO 7420 --- [confluence_api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-08-05T14:18:01.524+04:00  INFO 7420 --- [confluence_api] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5dd747c1
+2024-08-05T14:18:01.524+04:00  INFO 7420 --- [confluence_api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-08-05T14:18:01.652+04:00  WARN 7420 --- [confluence_api] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-05T14:18:04.793+04:00  INFO 7420 --- [confluence_api] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-05T14:18:05.018+04:00  INFO 7420 --- [confluence_api] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-05T14:18:05.340+04:00  WARN 7420 --- [confluence_api] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-05T14:18:07.947+04:00  INFO 7420 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : Started ConfluenceApiApplicationTests in 15.852 seconds (process running for 20.424)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

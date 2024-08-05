@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.confluence_api.dto.ConfluenceRootDTO;
@@ -29,8 +30,10 @@ public class ConfluenceController
     }
 
     @GetMapping("/content/getAll")
-    public ConfluenceRootDTO<ContentDTO> getAllContents()
-    {
-        return this.confluenceContentService.getAllContents();  
+    public ConfluenceRootDTO<ContentDTO> getAllContents(
+        @RequestParam(defaultValue = "0") int start, 
+        @RequestParam(defaultValue = "100") int limit
+    ){
+        return this.confluenceContentService.getAllContents(start, limit);  
     }
 }
