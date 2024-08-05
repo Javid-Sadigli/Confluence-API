@@ -2,9 +2,9 @@ package com.example.confluence_api.dto;
 
 import java.util.ArrayList;
 
-public class ConfluenceRootDTO 
+public class ConfluenceRootDTO <T> 
 {
-    public ArrayList<ContentDTO> results;
+    public ArrayList<T> results;
     public int start;
     public int limit;
     public int size;
