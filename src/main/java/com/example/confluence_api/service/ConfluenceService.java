@@ -10,32 +10,46 @@ import org.springframework.stereotype.Service;
 import com.example.confluence_api.client.ConfluenceClient;
 import com.example.confluence_api.client.model.ConfluenceResponse;
 import com.example.confluence_api.client.model.ContentResponse;
+import com.example.confluence_api.client.model.GroupResponse;
 import com.example.confluence_api.dto.ConfluenceRootDTO;
 import com.example.confluence_api.dto.ContentDTO;
+import com.example.confluence_api.dto.GroupDTO;
 import com.example.confluence_api.entity.ContentEntity;
+import com.example.confluence_api.entity.GroupEntity;
 import com.example.confluence_api.mapper.ContentMapper;
+import com.example.confluence_api.mapper.GroupMapper;
 import com.example.confluence_api.mapper.LinksMapper;
-import com.example.confluence_api.repository.ConfluenceRepository;
+import com.example.confluence_api.repository.ConfluenceContentRepository;
+import com.example.confluence_api.repository.ConfluenceGroupRepository;
 
 @Service
 public class ConfluenceService 
 {
     private final ContentMapper contentMapper; 
     private final LinksMapper linksMapper; 
+    private final GroupMapper groupMapper; 
     private final ConfluenceClient confluenceClient; 
-    private final ConfluenceRepository confluenceContentRepository; 
+    private final ConfluenceContentRepository confluenceContentRepository; 
+    private final ConfluenceGroupRepository confluenceGroupRepository; 
 
     public ConfluenceService(
         ContentMapper contentMapper, 
         LinksMapper linksMapper,
+        GroupMapper groupMapper, 
         ConfluenceClient confluenceClient, 
-        ConfluenceRepository confluenceContentRepository
+        ConfluenceContentRepository confluenceContentRepository, 
+        ConfluenceGroupRepository confluenceGroupRepository
     ){
         this.confluenceClient = confluenceClient; 
         this.contentMapper = contentMapper; 
         this.linksMapper = linksMapper; 
+        this.groupMapper = groupMapper; 
         this.confluenceContentRepository = confluenceContentRepository; 
+        this.confluenceGroupRepository = confluenceGroupRepository;
     }
+
+
+    /* -------------------- CONTENT METHODS  -------------------- */
 
     public ConfluenceRootDTO<ContentDTO> saveContents()
     {
@@ -44,9 +58,7 @@ public class ConfluenceService
         
         ArrayList<ContentEntity> contents = new ArrayList<ContentEntity>();
 
-        dto.limit = response.limit; 
         dto.size = response.size; 
-        dto.start = response.start; 
         dto._links = this.linksMapper.entityToDTO(
             this.linksMapper.responseToEntity(response._links)
         ); 
@@ -64,17 +76,16 @@ public class ConfluenceService
         return dto; 
     }
 
-    public ConfluenceRootDTO<ContentDTO> getAllContents(int start, int limit)
+    public ConfluenceRootDTO<ContentDTO> getAllContents(int pageNumber, int size)
     {
-        Pageable pageble = PageRequest.of(start, limit); 
-        Page<ContentEntity> contentPage = this.confluenceContentRepository.findAll(pageble);
+        Pageable pageable = PageRequest.of(pageNumber, size); 
+        Page<ContentEntity> contentPage = this.confluenceContentRepository.findAll(pageable);
 
         ConfluenceRootDTO<ContentDTO> dto = new ConfluenceRootDTO<ContentDTO>();
         ArrayList<ContentEntity> contentEntities = new ArrayList<ContentEntity>(contentPage.getContent()); 
         
         dto.size = contentEntities.size();
-        dto.start = start; 
-        dto.limit = limit; 
+        dto.pageNumber = pageNumber; 
         dto.results = new ArrayList<ContentDTO>();
         
         contentEntities.forEach((contentEntity) -> {
@@ -85,4 +96,57 @@ public class ConfluenceService
         return dto;
     }
 
+    public ContentDTO getContentById(String id)
+    {
+        ContentEntity contentEntity = this.confluenceContentRepository.findById(id).orElse(null);
+        return this.contentMapper.entityToDTO(contentEntity); 
+    }
+
+
+    /* -------------------- GROUP METHODS  -------------------- */
+
+    public ConfluenceRootDTO<GroupDTO> saveGroups()
+    {
+        ConfluenceRootDTO<GroupDTO> dto = new ConfluenceRootDTO<GroupDTO>();
+        ConfluenceResponse<GroupResponse> response = this.confluenceClient.fetchAllGroups();
+        
+        ArrayList<GroupEntity> groups = new ArrayList<GroupEntity>();
+
+        dto.size = response.size; 
+        dto._links = this.linksMapper.entityToDTO(
+            this.linksMapper.responseToEntity(response._links)
+        ); 
+        dto.results = new ArrayList<GroupDTO>();
+
+        response.results.forEach((result) -> {
+            GroupEntity groupEntity = this.groupMapper.responseToEntity(result); 
+            groups.add(groupEntity);
+            GroupDTO groupDTO = this.groupMapper.entityToDTO(groupEntity);
+            dto.results.add(groupDTO); 
+        });
+
+        this.confluenceGroupRepository.saveAll(groups);
+
+        return dto;
+    }
+
+    public ConfluenceRootDTO<GroupDTO> getAllGroups(int pageNumber, int size)
+    {
+        Pageable pageable = PageRequest.of(pageNumber, size); 
+        Page<GroupEntity> groupPage = this.confluenceGroupRepository.findAll(pageable);
+
+        ConfluenceRootDTO<GroupDTO> dto = new ConfluenceRootDTO<GroupDTO>();
+        ArrayList<GroupEntity> groupEntities = new ArrayList<GroupEntity>(groupPage.getContent()); 
+        
+        dto.size = groupEntities.size();
+        dto.pageNumber = pageNumber;
+        dto.results = new ArrayList<GroupDTO>();
+        
+        groupEntities.forEach((groupEntity) -> {
+            GroupDTO groupDTO = this.groupMapper.entityToDTO(groupEntity);
+            dto.results.add(groupDTO); 
+        });
+
+        return dto; 
+    }
 }

@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class ConfluenceRootDTO <T> 
 {
     public ArrayList<T> results;
-    public int start;
-    public int limit;
+    public int pageNumber;
     public int size;
     public LinksDTO _links;
 }
