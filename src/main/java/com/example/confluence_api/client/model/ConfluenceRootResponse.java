@@ -2,7 +2,7 @@ package com.example.confluence_api.client.model;
 
 import java.util.ArrayList;
 
-public class ConfluenceResponse<T> 
+public class ConfluenceRootResponse<T> 
 {
     public ArrayList<T> results;
     public int start;

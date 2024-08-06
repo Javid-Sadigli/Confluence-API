@@ -65,4 +65,10 @@ public class ConfluenceController
         return this.confluenceService.getAllGroups(pageNumber, size);
     }
 
+    @GetMapping("/group/get/{id}")
+    public GroupDTO getGroupById(@PathVariable String id)
+    {
+        return this.confluenceService.getGroupById(id);
+    }
+
 }

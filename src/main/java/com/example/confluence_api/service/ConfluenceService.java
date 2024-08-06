@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.confluence_api.client.ConfluenceClient;
-import com.example.confluence_api.client.model.ConfluenceResponse;
+import com.example.confluence_api.client.model.ConfluenceRootResponse;
 import com.example.confluence_api.client.model.ContentResponse;
 import com.example.confluence_api.client.model.GroupResponse;
 import com.example.confluence_api.dto.ConfluenceRootDTO;
@@ -18,7 +18,6 @@ import com.example.confluence_api.entity.ContentEntity;
 import com.example.confluence_api.entity.GroupEntity;
 import com.example.confluence_api.mapper.ContentMapper;
 import com.example.confluence_api.mapper.GroupMapper;
-import com.example.confluence_api.mapper.LinksMapper;
 import com.example.confluence_api.repository.ConfluenceContentRepository;
 import com.example.confluence_api.repository.ConfluenceGroupRepository;
 
@@ -26,7 +25,6 @@ import com.example.confluence_api.repository.ConfluenceGroupRepository;
 public class ConfluenceService 
 {
     private final ContentMapper contentMapper; 
-    private final LinksMapper linksMapper; 
     private final GroupMapper groupMapper; 
     private final ConfluenceClient confluenceClient; 
     private final ConfluenceContentRepository confluenceContentRepository; 
@@ -34,7 +32,6 @@ public class ConfluenceService
 
     public ConfluenceService(
         ContentMapper contentMapper, 
-        LinksMapper linksMapper,
         GroupMapper groupMapper, 
         ConfluenceClient confluenceClient, 
         ConfluenceContentRepository confluenceContentRepository, 
@@ -42,7 +39,6 @@ public class ConfluenceService
     ){
         this.confluenceClient = confluenceClient; 
         this.contentMapper = contentMapper; 
-        this.linksMapper = linksMapper; 
         this.groupMapper = groupMapper; 
         this.confluenceContentRepository = confluenceContentRepository; 
         this.confluenceGroupRepository = confluenceGroupRepository;
@@ -54,14 +50,11 @@ public class ConfluenceService
     public ConfluenceRootDTO<ContentDTO> saveContents()
     {
         ConfluenceRootDTO<ContentDTO> dto = new ConfluenceRootDTO<ContentDTO>();
-        ConfluenceResponse<ContentResponse> response = this.confluenceClient.fetchAllContents();
+        ConfluenceRootResponse<ContentResponse> response = this.confluenceClient.fetchAllContents();
         
         ArrayList<ContentEntity> contents = new ArrayList<ContentEntity>();
 
         dto.size = response.size; 
-        dto._links = this.linksMapper.entityToDTO(
-            this.linksMapper.responseToEntity(response._links)
-        ); 
         dto.results = new ArrayList<ContentDTO>();
 
         response.results.forEach((result) -> {
@@ -108,14 +101,11 @@ public class ConfluenceService
     public ConfluenceRootDTO<GroupDTO> saveGroups()
     {
         ConfluenceRootDTO<GroupDTO> dto = new ConfluenceRootDTO<GroupDTO>();
-        ConfluenceResponse<GroupResponse> response = this.confluenceClient.fetchAllGroups();
+        ConfluenceRootResponse<GroupResponse> response = this.confluenceClient.fetchAllGroups();
         
         ArrayList<GroupEntity> groups = new ArrayList<GroupEntity>();
 
         dto.size = response.size; 
-        dto._links = this.linksMapper.entityToDTO(
-            this.linksMapper.responseToEntity(response._links)
-        ); 
         dto.results = new ArrayList<GroupDTO>();
 
         response.results.forEach((result) -> {
@@ -148,5 +138,11 @@ public class ConfluenceService
         });
 
         return dto; 
+    }
+
+    public GroupDTO getGroupById(String id)
+    {
+        GroupEntity groupEntity = this.confluenceGroupRepository.findById(id).orElse(null);
+        return this.groupMapper.entityToDTO(groupEntity);
     }
 }
