@@ -178,4 +178,55 @@ public class ConfluenceService
         this.confluenceGroupRepository.save(groupEntity); 
         return dto; 
     }
+
+    public ConfluenceRootDTO<UserDTO> getGroupMembers(String groupId)
+    {
+        ConfluenceRootDTO<UserDTO> dto = new ConfluenceRootDTO<UserDTO>();
+        GroupEntity groupEntity = this.confluenceGroupRepository.findById(groupId).orElse(null);
+
+        try
+        {
+            dto.size = groupEntity.members.size();
+            dto.results = new ArrayList<UserDTO>();
+            groupEntity.members.forEach((member) -> {
+                UserDTO userDTO = this.userMapper.entityToDTO(member);
+                dto.results.add(userDTO);
+            });
+        }
+        catch(NullPointerException e)
+        {
+            dto.message = "Cannot find group that matches groupId: " + groupId; 
+        }
+
+        return dto; 
+    }
+
+    /* -------------------- USER METHODS  -------------------- */
+
+    public ConfluenceRootDTO<UserDTO> getAllUsers(int pageNumber, int size)
+    {
+        Pageable pageable = PageRequest.of(pageNumber, size);
+        Page<UserEntity> userPage = this.confluenceUserRepository.findAll(pageable);
+
+        ConfluenceRootDTO<UserDTO> dto = new ConfluenceRootDTO<UserDTO>();
+        ArrayList<UserEntity> userEntities = new ArrayList<UserEntity>(userPage.getContent());
+        
+        dto.size = userEntities.size();
+        dto.pageNumber = pageNumber;
+        dto.results = new ArrayList<UserDTO>();
+        
+        userEntities.forEach((userEntity) -> {
+            UserDTO userDTO = this.userMapper.entityToDTO(userEntity);
+            dto.results.add(userDTO);
+        });
+
+        return dto;
+    }
+
+    public UserDTO getUserById(String userId)
+    {
+        UserEntity userEntity = this.confluenceUserRepository.findById(userId).orElse(null);
+        return this.userMapper.entityToDTO(userEntity);
+    }
+
 }

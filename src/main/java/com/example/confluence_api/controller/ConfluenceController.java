@@ -78,4 +78,27 @@ public class ConfluenceController
         return this.confluenceService.saveGroupMembers(id);
     }
 
+    @GetMapping("/group/{id}/members/get")
+    public ConfluenceRootDTO<UserDTO> getGroupMembers(@PathVariable String id)
+    {
+        return this.confluenceService.getGroupMembers(id); 
+    }
+
+
+    /* -------------------- USER METHODS  -------------------- */
+
+    @GetMapping("/user/get/all")
+    public ConfluenceRootDTO<UserDTO> getAllUsers(
+        @RequestParam(defaultValue = "0") int pageNumber, 
+        @RequestParam(defaultValue = "100") int size
+    ){
+        return this.confluenceService.getAllUsers(pageNumber, size);
+    }
+
+    @GetMapping("/user/get/{id}")
+    public UserDTO getUserById(@PathVariable String id)
+    {
+        return this.confluenceService.getUserById(id);
+    }
+
 }

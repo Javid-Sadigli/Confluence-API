@@ -1,6 +1,5 @@
 package com.example.confluence_api.mapper;
 
-import org.apache.catalina.Group;
 import org.springframework.stereotype.Component;
 
 import com.example.confluence_api.client.model.GroupResponse;
