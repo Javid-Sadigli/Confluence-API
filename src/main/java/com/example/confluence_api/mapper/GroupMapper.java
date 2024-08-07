@@ -1,5 +1,6 @@
 package com.example.confluence_api.mapper;
 
+import org.apache.catalina.Group;
 import org.springframework.stereotype.Component;
 
 import com.example.confluence_api.client.model.GroupResponse;
@@ -23,6 +24,13 @@ public class GroupMapper
         {
             return null;
         }
+    }
+
+    public void convertResponseToEntityWithoutConsideringMembers(GroupEntity entity, GroupResponse response)
+    {
+        entity.id = response.id;
+        entity.name = response.name;
+        entity.type = response.type;
     }
 
     public GroupDTO entityToDTO(GroupEntity entity)

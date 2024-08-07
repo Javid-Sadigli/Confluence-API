@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity 
-@Table(name = "confluence_content")
+@Table(name = "contents")
 public class ContentEntity 
 {
     @Id

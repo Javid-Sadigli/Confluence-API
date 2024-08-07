@@ -120,7 +120,8 @@ public class ConfluenceService
         dto.results = new ArrayList<GroupDTO>();
 
         response.results.forEach((result) -> {
-            GroupEntity groupEntity = this.groupMapper.responseToEntity(result); 
+            GroupEntity groupEntity = this.confluenceGroupRepository.findById(result.id).orElse(new GroupEntity()); 
+            this.groupMapper.convertResponseToEntityWithoutConsideringMembers(groupEntity, result);
             groups.add(groupEntity);
             GroupDTO groupDTO = this.groupMapper.entityToDTO(groupEntity);
             dto.results.add(groupDTO); 
