@@ -38,6 +38,19 @@ public class UserMapper
         }
     }
 
+    public void convertResponseToEntityWithoutConsideringTasks(UserEntity entity, UserResponse response)
+    {
+        entity.accountId = response.accountId;
+        entity.accountType = response.accountType;
+        entity.email = response.email;
+        entity.displayName = response.displayName;
+        entity.isExternalCollaborator = response.isExternalCollaborator;
+        entity.isGuest = response.isGuest;
+        entity.publicName = response.publicName;
+        entity.type = response.type;
+        entity.profilePicture = this.profilePictureMapper.responseToEntity(response.profilePicture);
+    }
+
     public UserDTO entityToDTO(UserEntity entity) 
     {
         try

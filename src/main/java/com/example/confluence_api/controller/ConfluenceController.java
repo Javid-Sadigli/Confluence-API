@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.confluence_api.dto.ConfluenceRootDTO;
 import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.dto.GroupDTO;
+import com.example.confluence_api.dto.TaskDTO;
 import com.example.confluence_api.dto.UserDTO;
 import com.example.confluence_api.service.ConfluenceService;
 
@@ -87,6 +88,12 @@ public class ConfluenceController
 
     /* -------------------- USER METHODS  -------------------- */
 
+    @PostMapping("/user/save")
+    public ConfluenceRootDTO<UserDTO> saveUsers(@RequestBody Object body)
+    {
+        return this.confluenceService.saveUsers();  
+    }
+
     @GetMapping("/user/get/all")
     public ConfluenceRootDTO<UserDTO> getAllUsers(
         @RequestParam(defaultValue = "0") int pageNumber, 
@@ -99,6 +106,47 @@ public class ConfluenceController
     public UserDTO getUserById(@PathVariable String id)
     {
         return this.confluenceService.getUserById(id);
+    }
+
+    @GetMapping("/user/{id}/tasks/completed/get")
+    public ConfluenceRootDTO<TaskDTO> getCompletedTasksForAUser(@PathVariable String id)
+    {
+        return this.confluenceService.getUserCompletedTasks(id);
+    }
+
+    @GetMapping("/user/{id}/tasks/assigned/get")
+    public ConfluenceRootDTO<TaskDTO> getAssignedTasksForAUser(@PathVariable String id)
+    {
+        return this.confluenceService.getUserAssignedTasks(id); 
+    }
+
+    @GetMapping("/user/{id}/tasks/created/get")
+    public ConfluenceRootDTO<TaskDTO> getCreatedTasksForAUser(@PathVariable String id)
+    {
+        return this.confluenceService.getUserCreatedTasks(id);
+    }
+
+
+    /* -------------------- TASK METHODS  -------------------- */
+    
+    @PostMapping("/task/save")
+    public ConfluenceRootDTO<TaskDTO> saveTasks(@RequestBody Object body)
+    {
+        return this.confluenceService.saveTasks(); 
+    }
+
+    @GetMapping("/task/get/all")
+    public ConfluenceRootDTO<TaskDTO> getAllTasks(
+        @RequestParam(defaultValue = "0") int pageNumber, 
+        @RequestParam(defaultValue = "100") int size
+    ){
+        return this.confluenceService.getAllTasks(pageNumber, size);
+    }
+
+    @GetMapping("/task/get/{id}")
+    public TaskDTO getTaskById(@PathVariable String id)
+    {
+        return this.confluenceService.getTaskById(id); 
     }
 
 }
