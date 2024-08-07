@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.confluence_api.dto.ConfluenceRootDTO;
 import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.dto.GroupDTO;
+import com.example.confluence_api.dto.UserDTO;
 import com.example.confluence_api.service.ConfluenceService;
 
 @RestController
@@ -69,6 +70,12 @@ public class ConfluenceController
     public GroupDTO getGroupById(@PathVariable String id)
     {
         return this.confluenceService.getGroupById(id);
+    }
+
+    @PostMapping("/group/{id}/members/save")
+    public ConfluenceRootDTO<UserDTO> saveGroupMembers(@PathVariable String id)
+    {
+        return this.confluenceService.saveGroupMembers(id);
     }
 
 }

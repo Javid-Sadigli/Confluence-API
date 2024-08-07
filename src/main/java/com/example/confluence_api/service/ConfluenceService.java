@@ -11,37 +11,48 @@ import com.example.confluence_api.client.ConfluenceClient;
 import com.example.confluence_api.client.model.ConfluenceRootResponse;
 import com.example.confluence_api.client.model.ContentResponse;
 import com.example.confluence_api.client.model.GroupResponse;
+import com.example.confluence_api.client.model.UserResponse;
 import com.example.confluence_api.dto.ConfluenceRootDTO;
 import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.dto.GroupDTO;
+import com.example.confluence_api.dto.UserDTO;
 import com.example.confluence_api.entity.ContentEntity;
 import com.example.confluence_api.entity.GroupEntity;
+import com.example.confluence_api.entity.UserEntity;
 import com.example.confluence_api.mapper.ContentMapper;
 import com.example.confluence_api.mapper.GroupMapper;
+import com.example.confluence_api.mapper.UserMapper;
 import com.example.confluence_api.repository.ConfluenceContentRepository;
 import com.example.confluence_api.repository.ConfluenceGroupRepository;
+import com.example.confluence_api.repository.ConfluenceUserRepository;
 
 @Service
 public class ConfluenceService 
 {
     private final ContentMapper contentMapper; 
     private final GroupMapper groupMapper; 
+    private final UserMapper userMapper;
     private final ConfluenceClient confluenceClient; 
     private final ConfluenceContentRepository confluenceContentRepository; 
     private final ConfluenceGroupRepository confluenceGroupRepository; 
+    private final ConfluenceUserRepository confluenceUserRepository; 
 
     public ConfluenceService(
         ContentMapper contentMapper, 
         GroupMapper groupMapper, 
+        UserMapper userMapper,
         ConfluenceClient confluenceClient, 
         ConfluenceContentRepository confluenceContentRepository, 
-        ConfluenceGroupRepository confluenceGroupRepository
+        ConfluenceGroupRepository confluenceGroupRepository, 
+        ConfluenceUserRepository confluenceUserRepository
     ){
         this.confluenceClient = confluenceClient; 
         this.contentMapper = contentMapper; 
         this.groupMapper = groupMapper; 
+        this.userMapper = userMapper;
         this.confluenceContentRepository = confluenceContentRepository; 
         this.confluenceGroupRepository = confluenceGroupRepository;
+        this.confluenceUserRepository = confluenceUserRepository;
     }
 
 
@@ -144,5 +155,26 @@ public class ConfluenceService
     {
         GroupEntity groupEntity = this.confluenceGroupRepository.findById(id).orElse(null);
         return this.groupMapper.entityToDTO(groupEntity);
+    }
+
+    public ConfluenceRootDTO<UserDTO> saveGroupMembers(String groupId)
+    {
+        ConfluenceRootResponse<UserResponse> response = this.confluenceClient.fetchUsersForAGroup(groupId); 
+        ConfluenceRootDTO<UserDTO> dto = new ConfluenceRootDTO<UserDTO>();
+        GroupEntity groupEntity = this.confluenceGroupRepository.findById(groupId).orElse(null);
+
+        dto.size = response.size;
+        dto.results = new ArrayList<UserDTO>();
+
+        response.results.forEach((member) -> {
+            UserEntity userEntity = this.userMapper.responseToEntity(member); 
+            this.confluenceUserRepository.save(userEntity);
+            UserDTO userDTO = this.userMapper.entityToDTO(userEntity);
+            dto.results.add(userDTO);
+            groupEntity.members.add(userEntity); 
+        });
+
+        this.confluenceGroupRepository.save(groupEntity); 
+        return dto; 
     }
 }

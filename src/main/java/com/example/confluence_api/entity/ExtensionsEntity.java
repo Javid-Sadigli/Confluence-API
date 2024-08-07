@@ -6,8 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "extensions")
+// @Entity
+// @Table(name = "extensions")
 public class ExtensionsEntity 
 {
     @Id

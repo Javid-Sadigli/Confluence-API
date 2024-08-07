@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.confluence_api.ConfluenceApiApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-06T12:31:51" hostname="IT-L0083" time="1.594">
+<testsuite name="com.example.confluence_api.ConfluenceApiApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-07T07:22:37" hostname="IT-L0083" time="1.712">
   <properties/>
-  <testcase name="contextLoads()" classname="com.example.confluence_api.ConfluenceApiApplicationTests" time="1.594"/>
-  <system-out><![CDATA[16:31:35.307 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.confluence_api.ConfluenceApiApplicationTests]: ConfluenceApiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-16:31:35.681 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.confluence_api.ConfluenceApiApplication for test class com.example.confluence_api.ConfluenceApiApplicationTests
+  <testcase name="contextLoads()" classname="com.example.confluence_api.ConfluenceApiApplicationTests" time="1.712"/>
+  <system-out><![CDATA[11:22:18.679 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.confluence_api.ConfluenceApiApplicationTests]: ConfluenceApiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:22:19.114 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.confluence_api.ConfluenceApiApplication for test class com.example.confluence_api.ConfluenceApiApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,87 +14,23 @@
 
  :: Spring Boot ::                (v3.3.2)
 
-2024-08-06T16:31:37.831+04:00  INFO 11808 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : Starting ConfluenceApiApplicationTests using Java 17.0.11 with PID 11808 (started by javid.sadigli in C:\Users\javid.sadigli\Desktop\Confluence-API)
-2024-08-06T16:31:37.831+04:00  INFO 11808 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : No active profile set, falling back to 1 default profile: "default"
-2024-08-06T16:31:40.262+04:00  INFO 11808 --- [confluence_api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-08-06T16:31:40.495+04:00  INFO 11808 --- [confluence_api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 197 ms. Found 2 JPA repository interfaces.
-2024-08-06T16:31:41.326+04:00  INFO 11808 --- [confluence_api] [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=3ee47079-a58d-3444-a305-01d2b0837b00
-2024-08-06T16:31:42.425+04:00  INFO 11808 --- [confluence_api] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-08-06T16:31:42.672+04:00  INFO 11808 --- [confluence_api] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
-2024-08-06T16:31:42.781+04:00  INFO 11808 --- [confluence_api] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-08-06T16:31:43.740+04:00  INFO 11808 --- [confluence_api] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-08-06T16:31:43.866+04:00  INFO 11808 --- [confluence_api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-08-06T16:31:44.234+04:00  INFO 11808 --- [confluence_api] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@69ba72da
-2024-08-06T16:31:44.234+04:00  INFO 11808 --- [confluence_api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-08-06T16:31:44.298+04:00  WARN 11808 --- [confluence_api] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-08-06T16:31:47.458+04:00  INFO 11808 --- [confluence_api] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: 
-    alter table if exists confluence_content 
-       add column _expandable_id bigint
-Hibernate: 
-    alter table if exists confluence_content 
-       add column _links_id bigint
-Hibernate: 
-    alter table if exists confluence_content 
-       add column extensions_id bigint
-Hibernate: 
-    alter table if exists groups 
-       add column _links_id bigint
-Hibernate: 
-    alter table if exists confluence_content 
-       drop constraint if exists UK1rfbr4r96i0jtb4sufnagga1f
-2024-08-06T16:31:47.706+04:00  WARN 11808 --- [confluence_api] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2024-08-06T16:31:47.706+04:00  WARN 11808 --- [confluence_api] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : constraint "uk1rfbr4r96i0jtb4sufnagga1f" of relation "confluence_content" does not exist, skipping
-Hibernate: 
-    alter table if exists confluence_content 
-       add constraint UK1rfbr4r96i0jtb4sufnagga1f unique (_expandable_id)
-Hibernate: 
-    alter table if exists confluence_content 
-       drop constraint if exists UKsu8kvx3gnum181hum4q0btrx8
-2024-08-06T16:31:47.761+04:00  WARN 11808 --- [confluence_api] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2024-08-06T16:31:47.761+04:00  WARN 11808 --- [confluence_api] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : constraint "uksu8kvx3gnum181hum4q0btrx8" of relation "confluence_content" does not exist, skipping
-Hibernate: 
-    alter table if exists confluence_content 
-       add constraint UKsu8kvx3gnum181hum4q0btrx8 unique (_links_id)
-Hibernate: 
-    alter table if exists confluence_content 
-       drop constraint if exists UKr8v68r4r6fs6yvol1bcijfgfe
-2024-08-06T16:31:47.777+04:00  WARN 11808 --- [confluence_api] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2024-08-06T16:31:47.778+04:00  WARN 11808 --- [confluence_api] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : constraint "ukr8v68r4r6fs6yvol1bcijfgfe" of relation "confluence_content" does not exist, skipping
-Hibernate: 
-    alter table if exists confluence_content 
-       add constraint UKr8v68r4r6fs6yvol1bcijfgfe unique (extensions_id)
-Hibernate: 
-    alter table if exists groups 
-       drop constraint if exists UK58hrptsy4jwv6ve6i5jtepnxh
-2024-08-06T16:31:47.800+04:00  WARN 11808 --- [confluence_api] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2024-08-06T16:31:47.800+04:00  WARN 11808 --- [confluence_api] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : constraint "uk58hrptsy4jwv6ve6i5jtepnxh" of relation "groups" does not exist, skipping
-Hibernate: 
-    alter table if exists groups 
-       add constraint UK58hrptsy4jwv6ve6i5jtepnxh unique (_links_id)
-Hibernate: 
-    alter table if exists confluence_content 
-       add constraint FKm64k4rgomycy4q1rtstaa609 
-       foreign key (_expandable_id) 
-       references expandable
-Hibernate: 
-    alter table if exists confluence_content 
-       add constraint FKl94dhwleagn19eeb8ucodhr4j 
-       foreign key (_links_id) 
-       references links
-Hibernate: 
-    alter table if exists confluence_content 
-       add constraint FKh6n8hsvr839usy130tgoscyjp 
-       foreign key (extensions_id) 
-       references extensions
-Hibernate: 
-    alter table if exists groups 
-       add constraint FKm677p6msadatr5iq6wkirnsu2 
-       foreign key (_links_id) 
-       references links
-2024-08-06T16:31:47.966+04:00  INFO 11808 --- [confluence_api] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-08-06T16:31:48.239+04:00  WARN 11808 --- [confluence_api] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-08-06T16:31:51.929+04:00  INFO 11808 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : Started ConfluenceApiApplicationTests in 15.531 seconds (process running for 19.927)
+2024-08-07T11:22:21.555+04:00  INFO 5056 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : Starting ConfluenceApiApplicationTests using Java 17.0.11 with PID 5056 (started by javid.sadigli in C:\Users\javid.sadigli\Desktop\Java projects\Confluence-API)
+2024-08-07T11:22:21.559+04:00  INFO 5056 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2024-08-07T11:22:24.082+04:00  INFO 5056 --- [confluence_api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-07T11:22:24.314+04:00  INFO 5056 --- [confluence_api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 187 ms. Found 3 JPA repository interfaces.
+2024-08-07T11:22:25.122+04:00  INFO 5056 --- [confluence_api] [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=8e1b9337-8ea9-3dc0-b0dd-6b0d17261a67
+2024-08-07T11:22:26.516+04:00  INFO 5056 --- [confluence_api] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-07T11:22:26.793+04:00  INFO 5056 --- [confluence_api] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-07T11:22:26.926+04:00  INFO 5056 --- [confluence_api] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-07T11:22:28.280+04:00  INFO 5056 --- [confluence_api] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-07T11:22:28.371+04:00  INFO 5056 --- [confluence_api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-08-07T11:22:28.854+04:00  INFO 5056 --- [confluence_api] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@9f2376f
+2024-08-07T11:22:28.860+04:00  INFO 5056 --- [confluence_api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-08-07T11:22:28.998+04:00  WARN 5056 --- [confluence_api] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-07T11:22:32.230+04:00  INFO 5056 --- [confluence_api] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-07T11:22:32.505+04:00  INFO 5056 --- [confluence_api] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-07T11:22:33.122+04:00  WARN 5056 --- [confluence_api] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-07T11:22:37.299+04:00  INFO 5056 --- [confluence_api] [    Test worker] c.e.c.ConfluenceApiApplicationTests      : Started ConfluenceApiApplicationTests in 17.307 seconds (process running for 22.832)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

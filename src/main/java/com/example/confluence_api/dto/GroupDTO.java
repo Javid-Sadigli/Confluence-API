@@ -4,6 +4,5 @@ public class GroupDTO
 {
     public String id;
     public String type;
-    public String name;
-    public LinksDTO _links;        
+    public String name;    
 }

@@ -8,5 +8,4 @@ public class ConfluenceRootResponse<T>
     public int start;
     public int limit;
     public int size;
-    public LinksResponse _links;
 }

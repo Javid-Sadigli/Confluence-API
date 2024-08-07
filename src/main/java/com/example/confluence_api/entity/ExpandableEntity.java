@@ -6,8 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "expandable")
+// @Entity
+// @Table(name = "expandable")
 public class ExpandableEntity 
 {
     @Id
