@@ -41,6 +41,10 @@ public class UserEntity
     @JoinColumn(name = "assigned_to")
     public List<TaskEntity> assignedTasks;
 
+    @OneToMany
+    @JoinColumn(name = "author_id")
+    public List<SpaceEntity> spaces; 
+
     
     @Override public boolean equals(Object o) {
         if (this == o) return true;

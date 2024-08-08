@@ -10,12 +10,10 @@ import com.example.confluence_api.entity.TaskEntity;
 public class TaskMapper 
 {
     
-    public void convertResponseToEntityWithoutConsideringUsers(TaskEntity entity, TaskResponse response)
+    public void convertResponseToEntityWithoutConsideringRelations(TaskEntity entity, TaskResponse response)
     {
         entity.id = response.id;
         entity.localId = response.localId;
-        entity.spaceId = response.spaceId;
-        entity.pageId = response.pageId;
         entity.blogPostId = response.blogPostId;
         entity.status = response.status;
         entity.createdAt = response.createdAt;
@@ -31,8 +29,8 @@ public class TaskMapper
             TaskDTO taskDTO = new TaskDTO();
             taskDTO.id = entity.id;
             taskDTO.localId = entity.localId;
-            taskDTO.spaceId = entity.spaceId;
-            taskDTO.pageId = entity.pageId;
+            taskDTO.spaceId = entity.space != null ? entity.space.id : null;
+            taskDTO.pageId = entity.page != null ? entity.page.id : null;
             taskDTO.blogPostId = entity.blogPostId;
             taskDTO.status = entity.status;
             taskDTO.createdBy = entity.createdBy != null ? entity.createdBy.accountId : null;

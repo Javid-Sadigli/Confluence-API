@@ -14,8 +14,6 @@ public class TaskEntity
     public String id;
 
     public String localId;
-    public String spaceId;
-    public String pageId;
     public String blogPostId;
     public String status;
     public String createdAt;
@@ -34,5 +32,12 @@ public class TaskEntity
     @ManyToOne
     @JoinColumn(name = "assigned_to")
     public UserEntity assignedTo; 
+
+    @ManyToOne
+    @JoinColumn(name = "page_id")
+    public ContentEntity page;
     
+    @ManyToOne
+    @JoinColumn(name = "space_id")
+    public SpaceEntity space;
 }

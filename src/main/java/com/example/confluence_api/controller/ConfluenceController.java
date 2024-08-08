@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.confluence_api.dto.ConfluenceRootDTO;
 import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.dto.GroupDTO;
+import com.example.confluence_api.dto.SpaceDTO;
 import com.example.confluence_api.dto.TaskDTO;
 import com.example.confluence_api.dto.UserDTO;
 import com.example.confluence_api.service.ConfluenceService;
@@ -148,5 +149,27 @@ public class ConfluenceController
     {
         return this.confluenceService.getTaskById(id); 
     }
+    
 
+    /* -------------------- SPACE METHODS  -------------------- */
+
+    @PostMapping("/space/save")
+    public ConfluenceRootDTO<SpaceDTO> saveSpaces(@RequestBody Object body)
+    {
+        return this.confluenceService.saveSpaces(); 
+    }
+
+    @GetMapping("/space/get/all")
+    public ConfluenceRootDTO<SpaceDTO> getAllSpaces(
+        @RequestParam(defaultValue = "0") int pageNumber, 
+        @RequestParam(defaultValue = "100") int size
+    ){
+        return this.confluenceService.getAllSpaces(pageNumber, size);
+    }
+
+    @GetMapping("/space/get/{id}")
+    public SpaceDTO getSpaceById(@PathVariable String id)
+    {
+        return this.confluenceService.getSpaceById(id); 
+    }
 }

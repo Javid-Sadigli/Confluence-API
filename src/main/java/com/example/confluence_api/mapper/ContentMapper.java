@@ -26,6 +26,14 @@ public class ContentMapper
         }
     }
 
+    public void convertResponseToEntityWithoutConsideringTasks(ContentEntity entity, ContentResponse response)
+    {
+        entity.id = response.id;
+        entity.status = response.status;
+        entity.title = response.title;
+        entity.type = response.type;
+    }
+
     public ContentDTO entityToDTO(ContentEntity contentEntity)
     {
         try

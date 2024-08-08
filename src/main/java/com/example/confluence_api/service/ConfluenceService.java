@@ -12,23 +12,28 @@ import com.example.confluence_api.client.ConfluenceClient;
 import com.example.confluence_api.client.model.ConfluenceRootResponse;
 import com.example.confluence_api.client.model.ContentResponse;
 import com.example.confluence_api.client.model.GroupResponse;
+import com.example.confluence_api.client.model.SpaceResponse;
 import com.example.confluence_api.client.model.TaskResponse;
 import com.example.confluence_api.client.model.UserResponse;
 import com.example.confluence_api.dto.ConfluenceRootDTO;
 import com.example.confluence_api.dto.ContentDTO;
 import com.example.confluence_api.dto.GroupDTO;
+import com.example.confluence_api.dto.SpaceDTO;
 import com.example.confluence_api.dto.TaskDTO;
 import com.example.confluence_api.dto.UserDTO;
 import com.example.confluence_api.entity.ContentEntity;
 import com.example.confluence_api.entity.GroupEntity;
+import com.example.confluence_api.entity.SpaceEntity;
 import com.example.confluence_api.entity.TaskEntity;
 import com.example.confluence_api.entity.UserEntity;
 import com.example.confluence_api.mapper.ContentMapper;
 import com.example.confluence_api.mapper.GroupMapper;
+import com.example.confluence_api.mapper.SpaceMapper;
 import com.example.confluence_api.mapper.TaskMapper;
 import com.example.confluence_api.mapper.UserMapper;
 import com.example.confluence_api.repository.ConfluenceContentRepository;
 import com.example.confluence_api.repository.ConfluenceGroupRepository;
+import com.example.confluence_api.repository.ConfluenceSpaceRepository;
 import com.example.confluence_api.repository.ConfluenceTaskRepository;
 import com.example.confluence_api.repository.ConfluenceUserRepository;
 
@@ -39,32 +44,38 @@ public class ConfluenceService
     private final GroupMapper groupMapper; 
     private final UserMapper userMapper;
     private final TaskMapper taskMapper;
+    private final SpaceMapper spaceMapper; 
     private final ConfluenceClient confluenceClient; 
     private final ConfluenceContentRepository confluenceContentRepository; 
     private final ConfluenceGroupRepository confluenceGroupRepository; 
     private final ConfluenceUserRepository confluenceUserRepository; 
-    private final ConfluenceTaskRepository confluenceTaskRepository; 
+    private final ConfluenceTaskRepository confluenceTaskRepository;
+    private final ConfluenceSpaceRepository confluenceSpaceRepository;  
 
     public ConfluenceService(
         ContentMapper contentMapper, 
         GroupMapper groupMapper, 
         UserMapper userMapper,
         TaskMapper taskMapper,  
+        SpaceMapper spaceMapper, 
         ConfluenceClient confluenceClient, 
         ConfluenceContentRepository confluenceContentRepository, 
         ConfluenceGroupRepository confluenceGroupRepository, 
         ConfluenceUserRepository confluenceUserRepository, 
-        ConfluenceTaskRepository confluenceTaskRepository
+        ConfluenceTaskRepository confluenceTaskRepository, 
+        ConfluenceSpaceRepository confluenceSpaceRepository
     ){
         this.confluenceClient = confluenceClient; 
         this.contentMapper = contentMapper; 
         this.groupMapper = groupMapper; 
         this.userMapper = userMapper;
         this.taskMapper = taskMapper;  
+        this.spaceMapper = spaceMapper;
         this.confluenceContentRepository = confluenceContentRepository; 
         this.confluenceGroupRepository = confluenceGroupRepository;
         this.confluenceUserRepository = confluenceUserRepository;
         this.confluenceTaskRepository = confluenceTaskRepository;
+        this.confluenceSpaceRepository = confluenceSpaceRepository;
     }
 
 
@@ -81,7 +92,8 @@ public class ConfluenceService
         dto.results = new ArrayList<ContentDTO>();
 
         response.results.forEach((result) -> {
-            ContentEntity contentEntity = this.contentMapper.responseToEntity(result); 
+            ContentEntity contentEntity = this.confluenceContentRepository.findById(result.id).orElse(new ContentEntity());
+            this.contentMapper.convertResponseToEntityWithoutConsideringTasks(contentEntity, result); 
             contents.add(contentEntity);
             ContentDTO contentDTO = this.contentMapper.entityToDTO(contentEntity);
             dto.results.add(contentDTO); 
@@ -349,11 +361,13 @@ public class ConfluenceService
         
         response.results.forEach((result) -> {
             TaskEntity taskEntity = this.confluenceTaskRepository.findById(result.id).orElse(new TaskEntity()); 
-            this.taskMapper.convertResponseToEntityWithoutConsideringUsers(taskEntity, result);
+            this.taskMapper.convertResponseToEntityWithoutConsideringRelations(taskEntity, result);
             taskEntity.assignedTo = result.assignedTo != null ? this.confluenceUserRepository.findById(result.assignedTo).orElse(null) : null;
             taskEntity.completedBy = result.completedBy != null ? this.confluenceUserRepository.findById(result.completedBy).orElse(null) : null; 
             taskEntity.createdBy = result.createdBy != null ? this.confluenceUserRepository.findById(result.createdBy).orElse(null) : null; 
             tasks.add(taskEntity); 
+            taskEntity.page = result.pageId != null ? this.confluenceContentRepository.findById(result.pageId).orElse(null) : null; 
+            taskEntity.space = result.spaceId != null ? this.confluenceSpaceRepository.findById(result.spaceId).orElse(null) : null;
             TaskDTO taskDTO = this.taskMapper.entityToDTO(taskEntity);
             dto.results.add(taskDTO);
         });
@@ -391,4 +405,58 @@ public class ConfluenceService
         return this.taskMapper.entityToDTO(taskEntity);
     }
 
+
+    /* -------------------- SPACE METHODS  -------------------- */
+    
+    public ConfluenceRootDTO<SpaceDTO> saveSpaces()
+    {
+        ConfluenceRootDTO<SpaceDTO> dto = new ConfluenceRootDTO<SpaceDTO>();
+        ConfluenceRootResponse<SpaceResponse> response = this.confluenceClient.fetchAllSpaces();
+        
+        ArrayList<SpaceEntity> spaces = new ArrayList<SpaceEntity>();
+        
+        dto.results = new ArrayList<SpaceDTO>();
+
+        response.results.forEach((result) -> {
+            SpaceEntity spaceEntity = this.confluenceSpaceRepository.findById(result.id).orElse(new SpaceEntity()); 
+            this.spaceMapper.convertResponseToEntityWithoutConsideringRelations(spaceEntity, result);
+            spaceEntity.author = result.authorId != null ? this.confluenceUserRepository.findById(result.authorId).orElse(null) : null; 
+            spaceEntity.homepage = result.homepageId != null ? this.confluenceContentRepository.findById(result.homepageId).orElse(null) : null;
+            spaces.add(spaceEntity);
+            SpaceDTO spaceDTO = this.spaceMapper.entityToDTO(spaceEntity);
+            dto.results.add(spaceDTO);
+        });
+
+        dto.size = spaces.size();
+        
+        this.confluenceSpaceRepository.saveAll(spaces);
+        
+        return dto;
+    }
+
+    public ConfluenceRootDTO<SpaceDTO> getAllSpaces(int pageNumber, int size)
+    {
+        Pageable pageable = PageRequest.of(pageNumber, size);
+        Page<SpaceEntity> spacePage = this.confluenceSpaceRepository.findAll(pageable);
+
+        ConfluenceRootDTO<SpaceDTO> dto = new ConfluenceRootDTO<SpaceDTO>();
+        ArrayList<SpaceEntity> spaceEntities = new ArrayList<SpaceEntity>(spacePage.getContent());
+        
+        dto.size = spaceEntities.size();
+        dto.pageNumber = pageNumber;
+        dto.results = new ArrayList<SpaceDTO>();
+        
+        spaceEntities.forEach((spaceEntity) -> {
+            SpaceDTO spaceDTO = this.spaceMapper.entityToDTO(spaceEntity);
+            dto.results.add(spaceDTO);
+        });
+
+        return dto;
+    }
+
+    public SpaceDTO getSpaceById(String spaceId)
+    {
+        SpaceEntity spaceEntity = this.confluenceSpaceRepository.findById(spaceId).orElse(null);
+        return this.spaceMapper.entityToDTO(spaceEntity);
+    }
 }
