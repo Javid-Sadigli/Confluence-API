@@ -1,4 +1,4 @@
-package com.example.confluence_api.mapper;
+package com.example.confluence_api.mapper.confluence;
 
 import org.springframework.stereotype.Component;
 
