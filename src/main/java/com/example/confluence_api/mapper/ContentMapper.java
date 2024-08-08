@@ -1,19 +1,19 @@
-package com.example.confluence_api.mapper.confluence;
+package com.example.confluence_api.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.ContentResponse;
-import com.example.confluence_api.dto.ContentDTO;
-import com.example.confluence_api.entity.ContentEntity;
+import com.example.confluence_api.client.model.ConfluenceContentResponse;
+import com.example.confluence_api.dto.ConfluenceContentDTO;
+import com.example.confluence_api.entity.ConfluenceContentEntity;
 
 @Component
 public class ContentMapper 
 {
-    public ContentEntity responseToEntity(ContentResponse response)
+    public ConfluenceContentEntity responseToEntity(ConfluenceContentResponse response)
     {
         try
         {
-            ContentEntity contentEntity = new ContentEntity(); 
+            ConfluenceContentEntity contentEntity = new ConfluenceContentEntity(); 
             contentEntity.id = response.id; 
             contentEntity.status = response.status; 
             contentEntity.title = response.title; 
@@ -26,7 +26,7 @@ public class ContentMapper
         }
     }
 
-    public void convertResponseToEntityWithoutConsideringTasks(ContentEntity entity, ContentResponse response)
+    public void convertResponseToEntityWithoutConsideringTasks(ConfluenceContentEntity entity, ConfluenceContentResponse response)
     {
         entity.id = response.id;
         entity.status = response.status;
@@ -34,11 +34,11 @@ public class ContentMapper
         entity.type = response.type;
     }
 
-    public ContentDTO entityToDTO(ContentEntity contentEntity)
+    public ConfluenceContentDTO entityToDTO(ConfluenceContentEntity contentEntity)
     {
         try
         {
-            ContentDTO contentDTO = new ContentDTO(); 
+            ConfluenceContentDTO contentDTO = new ConfluenceContentDTO(); 
             contentDTO.id = contentEntity.id; 
             contentDTO.status = contentEntity.status; 
             contentDTO.title = contentEntity.title; 

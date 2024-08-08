@@ -7,8 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "profile_pictures")
-public class ProfilePictureEntity 
+@Table(name = "confluence_profile_pictures")
+public class ConfluenceProfilePictureEntity 
 {   
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

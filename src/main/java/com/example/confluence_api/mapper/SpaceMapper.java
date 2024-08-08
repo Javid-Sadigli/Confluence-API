@@ -1,10 +1,10 @@
-package com.example.confluence_api.mapper.confluence;
+package com.example.confluence_api.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.SpaceResponse;
-import com.example.confluence_api.dto.SpaceDTO;
-import com.example.confluence_api.entity.SpaceEntity;
+import com.example.confluence_api.client.model.ConfluenceSpaceResponse;
+import com.example.confluence_api.dto.ConfluenceSpaceDTO;
+import com.example.confluence_api.entity.ConfluenceSpaceEntity;
 
 @Component
 public class SpaceMapper 
@@ -16,7 +16,7 @@ public class SpaceMapper
         this.spaceIconMapper = spaceIconMapper;
     }
 
-    public void convertResponseToEntityWithoutConsideringRelations(SpaceEntity entity, SpaceResponse response)
+    public void convertResponseToEntityWithoutConsideringRelations(ConfluenceSpaceEntity entity, ConfluenceSpaceResponse response)
     {
         entity.id = response.id; 
         entity.key = response.key;
@@ -26,11 +26,11 @@ public class SpaceMapper
         entity.createdAt = response.createdAt;
     }
 
-    public SpaceDTO entityToDTO(SpaceEntity entity)
+    public ConfluenceSpaceDTO entityToDTO(ConfluenceSpaceEntity entity)
     {
         try
         {
-            SpaceDTO dto = new SpaceDTO();
+            ConfluenceSpaceDTO dto = new ConfluenceSpaceDTO();
             dto.id = entity.id;
             dto.key = entity.key;
             dto.name = entity.name;

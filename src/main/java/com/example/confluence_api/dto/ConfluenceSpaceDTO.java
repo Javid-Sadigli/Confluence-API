@@ -1,6 +1,6 @@
-package com.example.confluence_api.client.model;
+package com.example.confluence_api.dto;
 
-public class SpaceResponse 
+public class ConfluenceSpaceDTO 
 {
     public String id;
     public String key;
@@ -10,5 +10,5 @@ public class SpaceResponse
     public String authorId;
     public String createdAt;
     public String homepageId;
-    public SpaceIconResponse icon;     
+    public ConfluenceSpaceIconDTO icon; 
 }

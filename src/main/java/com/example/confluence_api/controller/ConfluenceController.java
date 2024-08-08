@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.confluence_api.dto.ConfluenceRootDTO;
-import com.example.confluence_api.dto.ContentDTO;
-import com.example.confluence_api.dto.GroupDTO;
-import com.example.confluence_api.dto.SpaceDTO;
-import com.example.confluence_api.dto.TaskDTO;
-import com.example.confluence_api.dto.UserDTO;
+import com.example.confluence_api.dto.ConfluenceContentDTO;
+import com.example.confluence_api.dto.ConfluenceGroupDTO;
+import com.example.confluence_api.dto.ConfluenceSpaceDTO;
+import com.example.confluence_api.dto.ConfluenceTaskDTO;
+import com.example.confluence_api.dto.ConfluenceUserDTO;
 import com.example.confluence_api.service.ConfluenceService;
 
 @RestController
@@ -32,13 +32,13 @@ public class ConfluenceController
     /* -------------------- CONTENT METHODS  -------------------- */
 
     @PostMapping("/content/save") 
-    public ConfluenceRootDTO<ContentDTO> saveContents(@RequestBody Object body)
+    public ConfluenceRootDTO<ConfluenceContentDTO> saveContents(@RequestBody Object body)
     {
         return this.confluenceService.saveContents(); 
     }
 
     @GetMapping("/content/get/all")
-    public ConfluenceRootDTO<ContentDTO> getAllContents(
+    public ConfluenceRootDTO<ConfluenceContentDTO> getAllContents(
         @RequestParam(defaultValue = "0") int pageNumber, 
         @RequestParam(defaultValue = "100") int size
     ){
@@ -46,7 +46,7 @@ public class ConfluenceController
     }
 
     @GetMapping("/content/get/{id}")
-    public ContentDTO getContentById(@PathVariable String id)
+    public ConfluenceContentDTO getContentById(@PathVariable String id)
     {
         return this.confluenceService.getContentById(id);
     }
@@ -55,13 +55,13 @@ public class ConfluenceController
     /* -------------------- GROUP METHODS  -------------------- */
 
     @PostMapping("/group/save")
-    public ConfluenceRootDTO<GroupDTO> saveGroups(@RequestBody Object body)
+    public ConfluenceRootDTO<ConfluenceGroupDTO> saveGroups(@RequestBody Object body)
     {
         return this.confluenceService.saveGroups(); 
     }
 
     @GetMapping("/group/get/all")
-    public ConfluenceRootDTO<GroupDTO> getAllGroups(
+    public ConfluenceRootDTO<ConfluenceGroupDTO> getAllGroups(
         @RequestParam(defaultValue = "0") int pageNumber, 
         @RequestParam(defaultValue = "100") int size
     ){
@@ -69,19 +69,19 @@ public class ConfluenceController
     }
 
     @GetMapping("/group/get/{id}")
-    public GroupDTO getGroupById(@PathVariable String id)
+    public ConfluenceGroupDTO getGroupById(@PathVariable String id)
     {
         return this.confluenceService.getGroupById(id);
     }
 
     @PostMapping("/group/{id}/members/save")
-    public ConfluenceRootDTO<UserDTO> saveGroupMembers(@PathVariable String id)
+    public ConfluenceRootDTO<ConfluenceUserDTO> saveGroupMembers(@PathVariable String id)
     {
         return this.confluenceService.saveGroupMembers(id);
     }
 
     @GetMapping("/group/{id}/members/get")
-    public ConfluenceRootDTO<UserDTO> getGroupMembers(@PathVariable String id)
+    public ConfluenceRootDTO<ConfluenceUserDTO> getGroupMembers(@PathVariable String id)
     {
         return this.confluenceService.getGroupMembers(id); 
     }
@@ -90,13 +90,13 @@ public class ConfluenceController
     /* -------------------- USER METHODS  -------------------- */
 
     @PostMapping("/user/save")
-    public ConfluenceRootDTO<UserDTO> saveUsers(@RequestBody Object body)
+    public ConfluenceRootDTO<ConfluenceUserDTO> saveUsers(@RequestBody Object body)
     {
         return this.confluenceService.saveUsers();  
     }
 
     @GetMapping("/user/get/all")
-    public ConfluenceRootDTO<UserDTO> getAllUsers(
+    public ConfluenceRootDTO<ConfluenceUserDTO> getAllUsers(
         @RequestParam(defaultValue = "0") int pageNumber, 
         @RequestParam(defaultValue = "100") int size
     ){
@@ -104,31 +104,31 @@ public class ConfluenceController
     }
 
     @GetMapping("/user/get/{id}")
-    public UserDTO getUserById(@PathVariable String id)
+    public ConfluenceUserDTO getUserById(@PathVariable String id)
     {
         return this.confluenceService.getUserById(id);
     }
 
     @GetMapping("/user/{id}/tasks/completed/get")
-    public ConfluenceRootDTO<TaskDTO> getCompletedTasksForAUser(@PathVariable String id)
+    public ConfluenceRootDTO<ConfluenceTaskDTO> getCompletedTasksForAUser(@PathVariable String id)
     {
         return this.confluenceService.getUserCompletedTasks(id);
     }
 
     @GetMapping("/user/{id}/tasks/assigned/get")
-    public ConfluenceRootDTO<TaskDTO> getAssignedTasksForAUser(@PathVariable String id)
+    public ConfluenceRootDTO<ConfluenceTaskDTO> getAssignedTasksForAUser(@PathVariable String id)
     {
         return this.confluenceService.getUserAssignedTasks(id); 
     }
 
     @GetMapping("/user/{id}/tasks/created/get")
-    public ConfluenceRootDTO<TaskDTO> getCreatedTasksForAUser(@PathVariable String id)
+    public ConfluenceRootDTO<ConfluenceTaskDTO> getCreatedTasksForAUser(@PathVariable String id)
     {
         return this.confluenceService.getUserCreatedTasks(id);
     }
 
     @GetMapping("/user/{id}/spaces/get")
-    public ConfluenceRootDTO<SpaceDTO> getSpacesForUser(@PathVariable String id)
+    public ConfluenceRootDTO<ConfluenceSpaceDTO> getSpacesForUser(@PathVariable String id)
     {
         return this.confluenceService.getUserSpaces(id);
     }
@@ -137,13 +137,13 @@ public class ConfluenceController
     /* -------------------- TASK METHODS  -------------------- */
     
     @PostMapping("/task/save")
-    public ConfluenceRootDTO<TaskDTO> saveTasks(@RequestBody Object body)
+    public ConfluenceRootDTO<ConfluenceTaskDTO> saveTasks(@RequestBody Object body)
     {
         return this.confluenceService.saveTasks(); 
     }
 
     @GetMapping("/task/get/all")
-    public ConfluenceRootDTO<TaskDTO> getAllTasks(
+    public ConfluenceRootDTO<ConfluenceTaskDTO> getAllTasks(
         @RequestParam(defaultValue = "0") int pageNumber, 
         @RequestParam(defaultValue = "100") int size
     ){
@@ -151,7 +151,7 @@ public class ConfluenceController
     }
 
     @GetMapping("/task/get/{id}")
-    public TaskDTO getTaskById(@PathVariable String id)
+    public ConfluenceTaskDTO getTaskById(@PathVariable String id)
     {
         return this.confluenceService.getTaskById(id); 
     }
@@ -160,13 +160,13 @@ public class ConfluenceController
     /* -------------------- SPACE METHODS  -------------------- */
 
     @PostMapping("/space/save")
-    public ConfluenceRootDTO<SpaceDTO> saveSpaces(@RequestBody Object body)
+    public ConfluenceRootDTO<ConfluenceSpaceDTO> saveSpaces(@RequestBody Object body)
     {
         return this.confluenceService.saveSpaces(); 
     }
 
     @GetMapping("/space/get/all")
-    public ConfluenceRootDTO<SpaceDTO> getAllSpaces(
+    public ConfluenceRootDTO<ConfluenceSpaceDTO> getAllSpaces(
         @RequestParam(defaultValue = "0") int pageNumber, 
         @RequestParam(defaultValue = "100") int size
     ){
@@ -174,7 +174,7 @@ public class ConfluenceController
     }
 
     @GetMapping("/space/get/{id}")
-    public SpaceDTO getSpaceById(@PathVariable String id)
+    public ConfluenceSpaceDTO getSpaceById(@PathVariable String id)
     {
         return this.confluenceService.getSpaceById(id); 
     }

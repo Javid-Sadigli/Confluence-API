@@ -1,19 +1,19 @@
-package com.example.confluence_api.mapper.confluence;
+package com.example.confluence_api.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.GroupResponse;
-import com.example.confluence_api.dto.GroupDTO;
-import com.example.confluence_api.entity.GroupEntity;
+import com.example.confluence_api.client.model.ConfluenceGroupResponse;
+import com.example.confluence_api.dto.ConfluenceGroupDTO;
+import com.example.confluence_api.entity.ConfluenceGroupEntity;
 
 @Component
 public class GroupMapper 
 {
-    public GroupEntity responseToEntity(GroupResponse response)
+    public ConfluenceGroupEntity responseToEntity(ConfluenceGroupResponse response)
     {
         try
         {
-            GroupEntity entity = new GroupEntity();
+            ConfluenceGroupEntity entity = new ConfluenceGroupEntity();
             entity.id = response.id;
             entity.name = response.name;
             entity.type = response.type;
@@ -25,18 +25,18 @@ public class GroupMapper
         }
     }
 
-    public void convertResponseToEntityWithoutConsideringMembers(GroupEntity entity, GroupResponse response)
+    public void convertResponseToEntityWithoutConsideringMembers(ConfluenceGroupEntity entity, ConfluenceGroupResponse response)
     {
         entity.id = response.id;
         entity.name = response.name;
         entity.type = response.type;
     }
 
-    public GroupDTO entityToDTO(GroupEntity entity)
+    public ConfluenceGroupDTO entityToDTO(ConfluenceGroupEntity entity)
     {
         try
         {
-            GroupDTO dto = new GroupDTO();
+            ConfluenceGroupDTO dto = new ConfluenceGroupDTO();
             dto.id = entity.id;
             dto.name = entity.name;
             dto.type = entity.type;

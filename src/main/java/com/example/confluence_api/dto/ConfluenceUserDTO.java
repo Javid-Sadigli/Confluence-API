@@ -1,13 +1,13 @@
 package com.example.confluence_api.dto;
 
-public class UserDTO 
+public class ConfluenceUserDTO 
 {
     public String accountId;
     public String type;    
     public String accountType;
     public String email;
     public String publicName;
-    public ProfilePictureDTO profilePicture;
+    public ConfluenceProfilePictureDTO profilePicture;
     public String displayName;
     public boolean isExternalCollaborator;
     public boolean isGuest;    
@@ -16,7 +16,7 @@ public class UserDTO
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
 
-        UserDTO userDTO = (UserDTO) o;
+        ConfluenceUserDTO userDTO = (ConfluenceUserDTO) o;
 
         return accountId != null ? accountId.equals(userDTO.accountId) : userDTO.accountId == null;
     }

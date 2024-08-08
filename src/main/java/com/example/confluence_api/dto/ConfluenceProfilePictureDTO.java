@@ -1,6 +1,6 @@
-package com.example.confluence_api.client.model;
+package com.example.confluence_api.dto;
 
-public class ProfilePictureResponse 
+public class ConfluenceProfilePictureDTO 
 {
     public String path; 
     public int width;

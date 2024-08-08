@@ -1,6 +1,6 @@
 package com.example.confluence_api.client.model;
 
-public class GroupResponse 
+public class ConfluenceGroupResponse 
 {
     public String id;
     public String type;

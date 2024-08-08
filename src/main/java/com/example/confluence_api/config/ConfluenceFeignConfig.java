@@ -18,7 +18,7 @@ import feign.Client;
 import feign.auth.BasicAuthRequestInterceptor;
 
 @Configuration
-public class FeignConfig 
+public class ConfluenceFeignConfig 
 {
     @Value("${feign.auth.username}")
     private String username;

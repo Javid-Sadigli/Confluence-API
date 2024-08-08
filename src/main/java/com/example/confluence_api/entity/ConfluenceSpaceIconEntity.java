@@ -7,8 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "space_icons")
-public class SpaceIconEntity 
+@Table(name = "confluence_space_icons")
+public class ConfluenceSpaceIconEntity 
 {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

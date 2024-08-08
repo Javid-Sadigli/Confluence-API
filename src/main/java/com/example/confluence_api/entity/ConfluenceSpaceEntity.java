@@ -11,8 +11,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "spaces")
-public class SpaceEntity 
+@Table(name = "confluence_spaces")
+public class ConfluenceSpaceEntity 
 {
     @Id
     public String id;
@@ -25,17 +25,17 @@ public class SpaceEntity
     
     @ManyToOne
     @JoinColumn(name = "icon_id")
-    public SpaceIconEntity icon; 
+    public ConfluenceSpaceIconEntity icon; 
 
     @ManyToOne
     @JoinColumn(name = "author_id")
-    public UserEntity author; 
+    public ConfluenceUserEntity author; 
 
     @OneToOne
     @JoinColumn(name = "homepage_id")
-    public ContentEntity homepage;
+    public ConfluenceContentEntity homepage;
 
     @OneToMany
     @JoinColumn(name = "space_id")
-    public List<ContentEntity> pages; 
+    public List<ConfluenceContentEntity> pages; 
 }

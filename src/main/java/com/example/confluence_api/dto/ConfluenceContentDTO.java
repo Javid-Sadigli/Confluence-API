@@ -1,6 +1,6 @@
 package com.example.confluence_api.dto;
 
-public class ContentDTO 
+public class ConfluenceContentDTO 
 {
     public String id;
     public String type;

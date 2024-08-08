@@ -1,19 +1,19 @@
-package com.example.confluence_api.mapper.confluence;
+package com.example.confluence_api.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.ProfilePictureResponse;
-import com.example.confluence_api.dto.ProfilePictureDTO;
-import com.example.confluence_api.entity.ProfilePictureEntity;
+import com.example.confluence_api.client.model.ConfluenceProfilePictureResponse;
+import com.example.confluence_api.dto.ConfluenceProfilePictureDTO;
+import com.example.confluence_api.entity.ConfluenceProfilePictureEntity;
 
 @Component
 public class ProfilePictureMapper 
 {
-    public ProfilePictureEntity responseToEntity(ProfilePictureResponse profilePictureResponse)
+    public ConfluenceProfilePictureEntity responseToEntity(ConfluenceProfilePictureResponse profilePictureResponse)
     {
         try
         {
-            ProfilePictureEntity profilePictureEntity = new ProfilePictureEntity();
+            ConfluenceProfilePictureEntity profilePictureEntity = new ConfluenceProfilePictureEntity();
             profilePictureEntity.height = profilePictureResponse.height; 
             profilePictureEntity.width = profilePictureResponse.width;
             profilePictureEntity.isDefault = profilePictureResponse.isDefault; 
@@ -26,11 +26,11 @@ public class ProfilePictureMapper
         }
     }
     
-    public ProfilePictureDTO entityToDTO(ProfilePictureEntity entity)
+    public ConfluenceProfilePictureDTO entityToDTO(ConfluenceProfilePictureEntity entity)
     {
         try
         {
-            ProfilePictureDTO profilePictureDTO = new ProfilePictureDTO();
+            ConfluenceProfilePictureDTO profilePictureDTO = new ConfluenceProfilePictureDTO();
             profilePictureDTO.height = entity.height;
             profilePictureDTO.width = entity.width;
             profilePictureDTO.isDefault = entity.isDefault;

@@ -1,10 +1,10 @@
-package com.example.confluence_api.mapper.confluence;
+package com.example.confluence_api.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.UserResponse;
-import com.example.confluence_api.dto.UserDTO;
-import com.example.confluence_api.entity.UserEntity;
+import com.example.confluence_api.client.model.ConfluenceUserResponse;
+import com.example.confluence_api.dto.ConfluenceUserDTO;
+import com.example.confluence_api.entity.ConfluenceUserEntity;
 
 @Component
 public class UserMapper 
@@ -16,11 +16,11 @@ public class UserMapper
         this.profilePictureMapper = profilePictureMapper;
     }
 
-    public UserEntity responseToEntity(UserResponse response)
+    public ConfluenceUserEntity responseToEntity(ConfluenceUserResponse response)
     {
         try
         {
-            UserEntity entity = new UserEntity();
+            ConfluenceUserEntity entity = new ConfluenceUserEntity();
             entity.accountId = response.accountId;
             entity.accountType = response.accountType;
             entity.email = response.email;
@@ -38,7 +38,7 @@ public class UserMapper
         }
     }
 
-    public void convertResponseToEntityWithoutConsideringTasks(UserEntity entity, UserResponse response)
+    public void convertResponseToEntityWithoutConsideringTasks(ConfluenceUserEntity entity, ConfluenceUserResponse response)
     {
         entity.accountId = response.accountId;
         entity.accountType = response.accountType;
@@ -51,11 +51,11 @@ public class UserMapper
         entity.profilePicture = this.profilePictureMapper.responseToEntity(response.profilePicture);
     }
 
-    public UserDTO entityToDTO(UserEntity entity) 
+    public ConfluenceUserDTO entityToDTO(ConfluenceUserEntity entity) 
     {
         try
         {
-            UserDTO dto = new UserDTO();
+            ConfluenceUserDTO dto = new ConfluenceUserDTO();
             dto.accountId = entity.accountId;
             dto.accountType = entity.accountType;
             dto.email = entity.email;

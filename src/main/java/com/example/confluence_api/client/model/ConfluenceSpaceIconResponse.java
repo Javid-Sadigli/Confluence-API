@@ -1,6 +1,6 @@
 package com.example.confluence_api.client.model;
 
-public class SpaceIconResponse 
+public class ConfluenceSpaceIconResponse 
 {
     public String path; 
     public String apiDownloadLink;    

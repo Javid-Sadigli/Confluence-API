@@ -9,8 +9,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity 
-@Table(name = "contents")
-public class ContentEntity 
+@Table(name = "confluence_contents")
+public class ConfluenceContentEntity 
 {
     @Id
     public String id;
@@ -21,5 +21,5 @@ public class ContentEntity
 
     @OneToMany
     @JoinColumn(name = "page_id")
-    public List<TaskEntity> tasks;
+    public List<ConfluenceTaskEntity> tasks;
 }

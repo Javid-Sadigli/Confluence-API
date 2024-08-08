@@ -1,16 +1,16 @@
-package com.example.confluence_api.mapper.confluence;
+package com.example.confluence_api.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.TaskResponse;
-import com.example.confluence_api.dto.TaskDTO;
-import com.example.confluence_api.entity.TaskEntity;
+import com.example.confluence_api.client.model.ConfluenceTaskResponse;
+import com.example.confluence_api.dto.ConfluenceTaskDTO;
+import com.example.confluence_api.entity.ConfluenceTaskEntity;
 
 @Component
 public class TaskMapper 
 {
     
-    public void convertResponseToEntityWithoutConsideringRelations(TaskEntity entity, TaskResponse response)
+    public void convertResponseToEntityWithoutConsideringRelations(ConfluenceTaskEntity entity, ConfluenceTaskResponse response)
     {
         entity.id = response.id;
         entity.localId = response.localId;
@@ -22,11 +22,11 @@ public class TaskMapper
         entity.completedAt = response.completedAt;
     }
     
-    public TaskDTO entityToDTO(TaskEntity entity)
+    public ConfluenceTaskDTO entityToDTO(ConfluenceTaskEntity entity)
     {
         try
         {
-            TaskDTO taskDTO = new TaskDTO();
+            ConfluenceTaskDTO taskDTO = new ConfluenceTaskDTO();
             taskDTO.id = entity.id;
             taskDTO.localId = entity.localId;
             taskDTO.spaceId = entity.space != null ? entity.space.id : null;

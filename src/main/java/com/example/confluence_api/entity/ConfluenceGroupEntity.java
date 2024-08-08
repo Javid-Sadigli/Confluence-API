@@ -10,8 +10,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "groups")
-public class GroupEntity 
+@Table(name = "confluence_groups")
+public class ConfluenceGroupEntity 
 {
     @Id
     public String id;
@@ -24,5 +24,5 @@ public class GroupEntity
         name = "group_members", 
         joinColumns = @JoinColumn(name = "group_id"), 
         inverseJoinColumns = @JoinColumn(name = "user_account_id"
-    )) public List<UserEntity> members;
+    )) public List<ConfluenceUserEntity> members;
 }

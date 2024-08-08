@@ -1,6 +1,6 @@
-package com.example.confluence_api.client.model;
+package com.example.confluence_api.dto;
 
-public class TaskResponse 
+public class ConfluenceTaskDTO 
 {
     public String id;
     public String localId;
