@@ -127,6 +127,12 @@ public class ConfluenceController
         return this.confluenceService.getUserCreatedTasks(id);
     }
 
+    @GetMapping("/user/{id}/spaces/get")
+    public ConfluenceRootDTO<SpaceDTO> getSpacesForUser(@PathVariable String id)
+    {
+        return this.confluenceService.getUserSpaces(id);
+    }
+
 
     /* -------------------- TASK METHODS  -------------------- */
     

@@ -348,6 +348,28 @@ public class ConfluenceService
         return dto;
     }
 
+    public ConfluenceRootDTO<SpaceDTO> getUserSpaces(String userId)
+    {
+        ConfluenceRootDTO<SpaceDTO> dto = new ConfluenceRootDTO<SpaceDTO>();
+        UserEntity userEntity = this.confluenceUserRepository.findById(userId).orElse(null);
+
+        try
+        {
+            dto.size = userEntity.spaces.size();
+            dto.results = new ArrayList<SpaceDTO>();
+            userEntity.spaces.forEach((space) -> {
+                SpaceDTO spaceDTO = this.spaceMapper.entityToDTO(space);
+                dto.results.add(spaceDTO);
+            });
+        }
+        catch(NullPointerException e)
+        {
+            dto.message = "Cannot find user that matches userId: " + userId;
+        }
+
+        return dto;
+    }
+
     /* -------------------- TASK METHODS  -------------------- */
 
     public ConfluenceRootDTO<TaskDTO> saveTasks()
