@@ -1,10 +1,22 @@
-package com.example.confluence_api.dto;
+package com.example.confluence_api.model;
 
-public class ConfluenceSpaceIconDTO 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "confluence_space_icons")
+public class ConfluenceSpaceIconEntity 
 {
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id; 
+
     private String path; 
-    private String apiDownloadLink;       
-    
+    private String apiDownloadLink;
+
+
+    public int getId() {
+        return this.id;
+    }
 
     public String getPath() {
         return this.path;
@@ -21,5 +33,5 @@ public class ConfluenceSpaceIconDTO
     public void setApiDownloadLink(String apiDownloadLink) {
         this.apiDownloadLink = apiDownloadLink;
     }
-    
+
 }

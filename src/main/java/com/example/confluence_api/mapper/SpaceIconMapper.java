@@ -1,10 +1,11 @@
 package com.example.confluence_api.mapper;
 
-import org.springframework.stereotype.Component;
 
 import com.example.confluence_api.client.model.ConfluenceSpaceIconResponse;
 import com.example.confluence_api.dto.ConfluenceSpaceIconDTO;
-import com.example.confluence_api.entity.ConfluenceSpaceIconEntity;
+import com.example.confluence_api.model.ConfluenceSpaceIconEntity;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class SpaceIconMapper 
@@ -14,8 +15,8 @@ public class SpaceIconMapper
         try
         {
             ConfluenceSpaceIconEntity entity = new ConfluenceSpaceIconEntity(); 
-            entity.apiDownloadLink = response.apiDownloadLink; 
-            entity.path = response.path;
+            entity.setApiDownloadLink(response.getApiDownloadLink());
+            entity.setPath(response.getPath());
             return entity;
         }
         catch(NullPointerException e)
@@ -29,8 +30,8 @@ public class SpaceIconMapper
         try
         {
             ConfluenceSpaceIconDTO dto = new ConfluenceSpaceIconDTO(); 
-            dto.apiDownloadLink = entity.apiDownloadLink; 
-            dto.path = entity.path;
+            dto.setApiDownloadLink(entity.getApiDownloadLink());
+            dto.setApiDownloadLink(entity.getApiDownloadLink());
             return dto;
         }
         catch(NullPointerException e)

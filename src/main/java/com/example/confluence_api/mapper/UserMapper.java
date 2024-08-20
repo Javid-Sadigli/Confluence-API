@@ -1,10 +1,10 @@
 package com.example.confluence_api.mapper;
 
-import org.springframework.stereotype.Component;
-
 import com.example.confluence_api.client.model.ConfluenceUserResponse;
 import com.example.confluence_api.dto.ConfluenceUserDTO;
-import com.example.confluence_api.entity.ConfluenceUserEntity;
+import com.example.confluence_api.model.ConfluenceUserEntity;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper 
@@ -21,15 +21,15 @@ public class UserMapper
         try
         {
             ConfluenceUserEntity entity = new ConfluenceUserEntity();
-            entity.accountId = response.accountId;
-            entity.accountType = response.accountType;
-            entity.email = response.email;
-            entity.displayName = response.displayName;
-            entity.isExternalCollaborator = response.isExternalCollaborator;
-            entity.isGuest = response.isGuest; 
-            entity.publicName = response.publicName;
-            entity.type = response.type;
-            entity.profilePicture = this.profilePictureMapper.responseToEntity(response.profilePicture); 
+            entity.setAccountId(response.getAccountId());
+            entity.setAccountType(response.getAccountType());
+            entity.setEmail(response.getEmail());
+            entity.setDisplayName(response.getDisplayName());
+            entity.setIsExternalCollaborator(response.isExternalCollaborator());
+            entity.setIsGuest(response.isGuest());
+            entity.setPublicName(response.getPublicName());
+            entity.setType(response.getType());
+            entity.setProfilePicture(this.profilePictureMapper.responseToEntity(response.getProfilePicture()));
             return entity;
         }
         catch(NullPointerException e)
@@ -40,15 +40,15 @@ public class UserMapper
 
     public void convertResponseToEntityWithoutConsideringTasks(ConfluenceUserEntity entity, ConfluenceUserResponse response)
     {
-        entity.accountId = response.accountId;
-        entity.accountType = response.accountType;
-        entity.email = response.email;
-        entity.displayName = response.displayName;
-        entity.isExternalCollaborator = response.isExternalCollaborator;
-        entity.isGuest = response.isGuest;
-        entity.publicName = response.publicName;
-        entity.type = response.type;
-        entity.profilePicture = this.profilePictureMapper.responseToEntity(response.profilePicture);
+        entity.setAccountId(response.getAccountId());
+        entity.setAccountType(response.getAccountType());
+        entity.setEmail(response.getEmail());
+        entity.setDisplayName(response.getDisplayName());
+        entity.setIsExternalCollaborator(response.isExternalCollaborator());
+        entity.setIsGuest(response.isGuest());
+        entity.setPublicName(response.getPublicName());
+        entity.setType(response.getType());
+        entity.setProfilePicture(this.profilePictureMapper.responseToEntity(response.getProfilePicture()));
     }
 
     public ConfluenceUserDTO entityToDTO(ConfluenceUserEntity entity) 
@@ -56,15 +56,15 @@ public class UserMapper
         try
         {
             ConfluenceUserDTO dto = new ConfluenceUserDTO();
-            dto.accountId = entity.accountId;
-            dto.accountType = entity.accountType;
-            dto.email = entity.email;
-            dto.displayName = entity.displayName;
-            dto.isExternalCollaborator = entity.isExternalCollaborator;
-            dto.isGuest = entity.isGuest;
-            dto.publicName = entity.publicName;
-            dto.type = entity.type;
-            dto.profilePicture = this.profilePictureMapper.entityToDTO(entity.profilePicture);
+            dto.setAccountId(entity.getAccountId());
+            dto.setAccountType(entity.getAccountType());
+            dto.setEmail(entity.getEmail());
+            dto.setDisplayName(entity.getDisplayName());
+            dto.setIsExternalCollaborator(entity.isExternalCollaborator());
+            dto.setIsGuest(entity.isGuest());
+            dto.setPublicName(entity.getPublicName());
+            dto.setType(entity.getType());
+            dto.setProfilePicture(this.profilePictureMapper.entityToDTO(entity.getProfilePicture()));
             return dto;
         }
         catch(NullPointerException e)

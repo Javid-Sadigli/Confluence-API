@@ -1,10 +1,10 @@
 package com.example.confluence_api.mapper;
 
-import org.springframework.stereotype.Component;
-
 import com.example.confluence_api.client.model.ConfluenceGroupResponse;
 import com.example.confluence_api.dto.ConfluenceGroupDTO;
-import com.example.confluence_api.entity.ConfluenceGroupEntity;
+import com.example.confluence_api.model.ConfluenceGroupEntity;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class GroupMapper 
@@ -14,9 +14,9 @@ public class GroupMapper
         try
         {
             ConfluenceGroupEntity entity = new ConfluenceGroupEntity();
-            entity.id = response.id;
-            entity.name = response.name;
-            entity.type = response.type;
+            entity.setId(response.getId());
+            entity.setName(response.getName());
+            entity.setType(response.getType());
             return entity;
         }
         catch(NullPointerException e)
@@ -27,9 +27,9 @@ public class GroupMapper
 
     public void convertResponseToEntityWithoutConsideringMembers(ConfluenceGroupEntity entity, ConfluenceGroupResponse response)
     {
-        entity.id = response.id;
-        entity.name = response.name;
-        entity.type = response.type;
+        entity.setId(response.getId());
+        entity.setName(response.getName());
+        entity.setType(response.getType());
     }
 
     public ConfluenceGroupDTO entityToDTO(ConfluenceGroupEntity entity)
@@ -37,9 +37,9 @@ public class GroupMapper
         try
         {
             ConfluenceGroupDTO dto = new ConfluenceGroupDTO();
-            dto.id = entity.id;
-            dto.name = entity.name;
-            dto.type = entity.type;
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setType(entity.getType());
             return dto;
         }
         catch(NullPointerException e)

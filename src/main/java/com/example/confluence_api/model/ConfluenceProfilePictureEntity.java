@@ -1,12 +1,25 @@
-package com.example.confluence_api.client.model;
+package com.example.confluence_api.model;
 
-public class ConfluenceProfilePictureResponse 
-{
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "confluence_profile_pictures")
+public class ConfluenceProfilePictureEntity 
+{   
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id; 
+
     private String path; 
     private int width;
     private int height;
     private boolean isDefault; 
 
+
+
+    public int getId() {
+        return this.id;
+    }
 
     public String getPath() {
         return this.path;
