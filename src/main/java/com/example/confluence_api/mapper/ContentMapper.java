@@ -1,23 +1,23 @@
 package com.example.confluence_api.mapper;
 
-import org.springframework.stereotype.Component;
+import com.example.confluence_api.client.model.ConfluenceContentResponse;
+import com.example.confluence_api.dto.ConfluenceContentDTO;
+import com.example.confluence_api.model.ConfluenceContentEntity;
 
-import com.example.confluence_api.client.model.ContentResponse;
-import com.example.confluence_api.dto.ContentDTO;
-import com.example.confluence_api.entity.ContentEntity;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ContentMapper 
 {
-    public ContentEntity responseToEntity(ContentResponse response)
+    public ConfluenceContentEntity responseToEntity(ConfluenceContentResponse response)
     {
         try
         {
-            ContentEntity contentEntity = new ContentEntity(); 
-            contentEntity.id = response.id; 
-            contentEntity.status = response.status; 
-            contentEntity.title = response.title; 
-            contentEntity.type = response.type; 
+            ConfluenceContentEntity contentEntity = new ConfluenceContentEntity(); 
+            contentEntity.setId(response.getId());
+            contentEntity.setStatus(response.getStatus());
+            contentEntity.setTitle(response.getTitle());
+            contentEntity.setType(response.getType());
             return contentEntity; 
         }
         catch(NullPointerException e)
@@ -26,23 +26,23 @@ public class ContentMapper
         }
     }
 
-    public void convertResponseToEntityWithoutConsideringTasks(ContentEntity entity, ContentResponse response)
+    public void convertResponseToEntityWithoutConsideringRelations(ConfluenceContentEntity entity, ConfluenceContentResponse response)
     {
-        entity.id = response.id;
-        entity.status = response.status;
-        entity.title = response.title;
-        entity.type = response.type;
+        entity.setId(response.getId());
+        entity.setStatus(response.getStatus());
+        entity.setTitle(response.getTitle());
+        entity.setType(response.getType());
     }
 
-    public ContentDTO entityToDTO(ContentEntity contentEntity)
+    public ConfluenceContentDTO entityToDTO(ConfluenceContentEntity contentEntity)
     {
         try
         {
-            ContentDTO contentDTO = new ContentDTO(); 
-            contentDTO.id = contentEntity.id; 
-            contentDTO.status = contentEntity.status; 
-            contentDTO.title = contentEntity.title; 
-            contentDTO.type = contentEntity.type; 
+            ConfluenceContentDTO contentDTO = new ConfluenceContentDTO(); 
+            contentDTO.setId(contentEntity.getId());
+            contentDTO.setStatus(contentEntity.getStatus());
+            contentDTO.setTitle(contentEntity.getTitle());
+            contentDTO.setType(contentEntity.getType());
             return contentDTO;
         }
         catch(NullPointerException e)

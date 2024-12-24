@@ -1,21 +1,22 @@
 package com.example.confluence_api.mapper;
 
-import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.SpaceIconResponse;
-import com.example.confluence_api.dto.SpaceIconDTO;
-import com.example.confluence_api.entity.SpaceIconEntity;
+import com.example.confluence_api.client.model.ConfluenceSpaceIconResponse;
+import com.example.confluence_api.dto.ConfluenceSpaceIconDTO;
+import com.example.confluence_api.model.ConfluenceSpaceIconEntity;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class SpaceIconMapper 
 {
-    public SpaceIconEntity responseToEntity(SpaceIconResponse response)
+    public ConfluenceSpaceIconEntity responseToEntity(ConfluenceSpaceIconResponse response)
     {
         try
         {
-            SpaceIconEntity entity = new SpaceIconEntity(); 
-            entity.apiDownloadLink = response.apiDownloadLink; 
-            entity.path = response.path;
+            ConfluenceSpaceIconEntity entity = new ConfluenceSpaceIconEntity(); 
+            entity.setApiDownloadLink(response.getApiDownloadLink());
+            entity.setPath(response.getPath());
             return entity;
         }
         catch(NullPointerException e)
@@ -24,13 +25,13 @@ public class SpaceIconMapper
         }
     }   
     
-    public SpaceIconDTO entityToDTO(SpaceIconEntity entity)
+    public ConfluenceSpaceIconDTO entityToDTO(ConfluenceSpaceIconEntity entity)
     {
         try
         {
-            SpaceIconDTO dto = new SpaceIconDTO(); 
-            dto.apiDownloadLink = entity.apiDownloadLink; 
-            dto.path = entity.path;
+            ConfluenceSpaceIconDTO dto = new ConfluenceSpaceIconDTO(); 
+            dto.setApiDownloadLink(entity.getApiDownloadLink());
+            dto.setApiDownloadLink(entity.getApiDownloadLink());
             return dto;
         }
         catch(NullPointerException e)

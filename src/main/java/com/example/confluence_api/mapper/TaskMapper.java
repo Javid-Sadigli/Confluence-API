@@ -1,45 +1,46 @@
 package com.example.confluence_api.mapper;
 
-import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.TaskResponse;
-import com.example.confluence_api.dto.TaskDTO;
-import com.example.confluence_api.entity.TaskEntity;
+import com.example.confluence_api.client.model.ConfluenceTaskResponse;
+import com.example.confluence_api.dto.ConfluenceTaskDTO;
+import com.example.confluence_api.model.ConfluenceTaskEntity;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class TaskMapper 
 {
     
-    public void convertResponseToEntityWithoutConsideringRelations(TaskEntity entity, TaskResponse response)
+    public void convertResponseToEntityWithoutConsideringRelations(ConfluenceTaskEntity entity, ConfluenceTaskResponse response)
     {
-        entity.id = response.id;
-        entity.localId = response.localId;
-        entity.blogPostId = response.blogPostId;
-        entity.status = response.status;
-        entity.createdAt = response.createdAt;
-        entity.updatedAt = response.updatedAt;
-        entity.dueAt = response.dueAt;
-        entity.completedAt = response.completedAt;
+        entity.setId(response.getId());
+        entity.setLocalId(response.getLocalId());
+        entity.setBlogPostId(response.getBlogPostId());
+        entity.setStatus(response.getStatus());
+        entity.setCreatedAt(response.createdAt());
+        entity.setUpdatedAt(response.updatedAt());
+        entity.setDueAt(response.dueAt());
+        entity.setCompletedAt(response.completedAt());
     }
     
-    public TaskDTO entityToDTO(TaskEntity entity)
+    public ConfluenceTaskDTO entityToDTO(ConfluenceTaskEntity entity)
     {
         try
         {
-            TaskDTO taskDTO = new TaskDTO();
-            taskDTO.id = entity.id;
-            taskDTO.localId = entity.localId;
-            taskDTO.spaceId = entity.space != null ? entity.space.id : null;
-            taskDTO.pageId = entity.page != null ? entity.page.id : null;
-            taskDTO.blogPostId = entity.blogPostId;
-            taskDTO.status = entity.status;
-            taskDTO.createdBy = entity.createdBy != null ? entity.createdBy.accountId : null;
-            taskDTO.assignedTo = entity.assignedTo != null ? entity.assignedTo.accountId : null;
-            taskDTO.completedBy = entity.completedBy != null ? entity.completedBy.accountId : null;;
-            taskDTO.createdAt = entity.createdAt;
-            taskDTO.updatedAt = entity.updatedAt;
-            taskDTO.dueAt = entity.dueAt;
-            taskDTO.completedAt = entity.completedAt;
+            ConfluenceTaskDTO taskDTO = new ConfluenceTaskDTO();
+            taskDTO.setId(entity.getId());
+            taskDTO.setLocalId(entity.getLocalId());
+            taskDTO.setSpaceId(entity.getSpace() != null ? entity.getSpace().getId() : null);
+            taskDTO.setPageId(entity.getPage() != null ? entity.getPage().getId() : null);
+            taskDTO.setBlogPostId(entity.getBlogPostId());
+            taskDTO.setStatus(entity.getStatus());
+            taskDTO.setCreatedBy(entity.createdBy() != null ? entity.createdBy().getAccountId() : null);
+            taskDTO.setAssignedTo(entity.assignedTo() != null ? entity.assignedTo().getAccountId() : null);
+            taskDTO.setCompletedBy(entity.completedBy() != null ? entity.completedBy().getAccountId() : null);
+            taskDTO.setCreatedAt(entity.createdAt());
+            taskDTO.setUpdatedAt(entity.updatedAt());
+            taskDTO.setDueAt(entity.dueAt());
+            taskDTO.setCompletedAt(entity.completedAt());
             return taskDTO;
         }
         catch(NullPointerException e)

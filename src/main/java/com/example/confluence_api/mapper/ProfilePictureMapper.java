@@ -1,23 +1,23 @@
 package com.example.confluence_api.mapper;
 
-import org.springframework.stereotype.Component;
+import com.example.confluence_api.client.model.ConfluenceProfilePictureResponse;
+import com.example.confluence_api.dto.ConfluenceProfilePictureDTO;
+import com.example.confluence_api.model.ConfluenceProfilePictureEntity;
 
-import com.example.confluence_api.client.model.ProfilePictureResponse;
-import com.example.confluence_api.dto.ProfilePictureDTO;
-import com.example.confluence_api.entity.ProfilePictureEntity;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ProfilePictureMapper 
 {
-    public ProfilePictureEntity responseToEntity(ProfilePictureResponse profilePictureResponse)
+    public ConfluenceProfilePictureEntity responseToEntity(ConfluenceProfilePictureResponse profilePictureResponse)
     {
         try
         {
-            ProfilePictureEntity profilePictureEntity = new ProfilePictureEntity();
-            profilePictureEntity.height = profilePictureResponse.height; 
-            profilePictureEntity.width = profilePictureResponse.width;
-            profilePictureEntity.isDefault = profilePictureResponse.isDefault; 
-            profilePictureEntity.path = profilePictureResponse.path;
+            ConfluenceProfilePictureEntity profilePictureEntity = new ConfluenceProfilePictureEntity();
+            profilePictureEntity.setHeight(profilePictureResponse.getHeight());
+            profilePictureEntity.setWidth(profilePictureResponse.getWidth());
+            profilePictureEntity.setIsDefault(profilePictureResponse.isDefault());
+            profilePictureEntity.setPath(profilePictureResponse.getPath());
             return profilePictureEntity;
         }
         catch(NullPointerException e)
@@ -26,15 +26,15 @@ public class ProfilePictureMapper
         }
     }
     
-    public ProfilePictureDTO entityToDTO(ProfilePictureEntity entity)
+    public ConfluenceProfilePictureDTO entityToDTO(ConfluenceProfilePictureEntity entity)
     {
         try
         {
-            ProfilePictureDTO profilePictureDTO = new ProfilePictureDTO();
-            profilePictureDTO.height = entity.height;
-            profilePictureDTO.width = entity.width;
-            profilePictureDTO.isDefault = entity.isDefault;
-            profilePictureDTO.path = entity.path;
+            ConfluenceProfilePictureDTO profilePictureDTO = new ConfluenceProfilePictureDTO();
+            profilePictureDTO.setHeight(entity.getHeight());
+            profilePictureDTO.setWidth(entity.getWidth());
+            profilePictureDTO.setIsDefault(entity.isDefault());
+            profilePictureDTO.setPath(entity.getPath());
             return profilePictureDTO;
         }
         catch(NullPointerException e)

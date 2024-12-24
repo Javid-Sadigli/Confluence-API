@@ -1,10 +1,11 @@
 package com.example.confluence_api.mapper;
 
-import org.springframework.stereotype.Component;
 
-import com.example.confluence_api.client.model.SpaceResponse;
-import com.example.confluence_api.dto.SpaceDTO;
-import com.example.confluence_api.entity.SpaceEntity;
+import com.example.confluence_api.client.model.ConfluenceSpaceResponse;
+import com.example.confluence_api.dto.ConfluenceSpaceDTO;
+import com.example.confluence_api.model.ConfluenceSpaceEntity;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class SpaceMapper 
@@ -16,30 +17,31 @@ public class SpaceMapper
         this.spaceIconMapper = spaceIconMapper;
     }
 
-    public void convertResponseToEntityWithoutConsideringRelations(SpaceEntity entity, SpaceResponse response)
+    public void convertResponseToEntityWithoutConsideringRelations(ConfluenceSpaceEntity entity, ConfluenceSpaceResponse response)
     {
-        entity.id = response.id; 
-        entity.key = response.key;
-        entity.name = response.name;
-        entity.type = response.type;
-        entity.status = response.status;
-        entity.createdAt = response.createdAt;
+        entity.setId(response.getId());
+        entity.setKey(response.getKey());
+        entity.setName(response.getName());
+        entity.setType(response.getType());
+        entity.setStatus(response.getStatus());
+        entity.setCreatedAt(response.createdAt());
     }
 
-    public SpaceDTO entityToDTO(SpaceEntity entity)
+    public ConfluenceSpaceDTO entityToDTO(ConfluenceSpaceEntity entity)
     {
         try
         {
-            SpaceDTO dto = new SpaceDTO();
-            dto.id = entity.id;
-            dto.key = entity.key;
-            dto.name = entity.name;
-            dto.type = entity.type;
-            dto.status = entity.status;
-            dto.createdAt = entity.createdAt;
-            dto.authorId = entity.author != null ? entity.author.accountId : null; 
-            dto.homepageId = entity.homepage != null ? entity.homepage.id : null;
-            dto.icon = spaceIconMapper.entityToDTO(entity.icon);
+            ConfluenceSpaceDTO dto = new ConfluenceSpaceDTO();
+            dto.setId(entity.getId());
+            dto.setKey(entity.getKey());
+            dto.setName(entity.getName());
+            dto.setType(entity.getType());
+            dto.setStatus(entity.getStatus());
+            dto.setCreatedAt(entity.createdAt());
+            dto.setAuthorId(entity.getAuthor() != null ? entity.getAuthor().getAccountId() : null);
+            dto.setHomepageId(entity.getHomepage() != null ? entity.getHomepage().getId() : null);
+            dto.setIcon(spaceIconMapper.entityToDTO(entity.getIcon()));
+
             return dto;
         }
         catch(NullPointerException e)

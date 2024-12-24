@@ -1,22 +1,22 @@
 package com.example.confluence_api.mapper;
 
-import org.springframework.stereotype.Component;
+import com.example.confluence_api.client.model.ConfluenceGroupResponse;
+import com.example.confluence_api.dto.ConfluenceGroupDTO;
+import com.example.confluence_api.model.ConfluenceGroupEntity;
 
-import com.example.confluence_api.client.model.GroupResponse;
-import com.example.confluence_api.dto.GroupDTO;
-import com.example.confluence_api.entity.GroupEntity;
+import org.springframework.stereotype.Component;
 
 @Component
 public class GroupMapper 
 {
-    public GroupEntity responseToEntity(GroupResponse response)
+    public ConfluenceGroupEntity responseToEntity(ConfluenceGroupResponse response)
     {
         try
         {
-            GroupEntity entity = new GroupEntity();
-            entity.id = response.id;
-            entity.name = response.name;
-            entity.type = response.type;
+            ConfluenceGroupEntity entity = new ConfluenceGroupEntity();
+            entity.setId(response.getId());
+            entity.setName(response.getName());
+            entity.setType(response.getType());
             return entity;
         }
         catch(NullPointerException e)
@@ -25,21 +25,21 @@ public class GroupMapper
         }
     }
 
-    public void convertResponseToEntityWithoutConsideringMembers(GroupEntity entity, GroupResponse response)
+    public void convertResponseToEntityWithoutConsideringMembers(ConfluenceGroupEntity entity, ConfluenceGroupResponse response)
     {
-        entity.id = response.id;
-        entity.name = response.name;
-        entity.type = response.type;
+        entity.setId(response.getId());
+        entity.setName(response.getName());
+        entity.setType(response.getType());
     }
 
-    public GroupDTO entityToDTO(GroupEntity entity)
+    public ConfluenceGroupDTO entityToDTO(ConfluenceGroupEntity entity)
     {
         try
         {
-            GroupDTO dto = new GroupDTO();
-            dto.id = entity.id;
-            dto.name = entity.name;
-            dto.type = entity.type;
+            ConfluenceGroupDTO dto = new ConfluenceGroupDTO();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setType(entity.getType());
             return dto;
         }
         catch(NullPointerException e)
